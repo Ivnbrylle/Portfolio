@@ -204,45 +204,6 @@ body {
     transform: translateY(-10px);
 }
 
-/* Services Section */
-.services {
-    padding: 40px 0;
-    background-color: #1a1a2e;
-    color: white;
-    text-align: center;;
-}
-
-.services .section-title {
-    color: white;
-    margin-bottom: 1rem;
-}
-
-.section-description {
-    max-width: 600px;
-    opacity: 0.9;
-    text-align: center;
-    margin:auto;
-}
-
-.cta-button {
-    display: inline-block;
-    padding: 12px 30px;
-    background-color: transparent;
-    color: white;
-    text-decoration: none;
-    border: 2px solid white;
-    border-radius: 25px;
-    font-weight: 500;
-    margin-top: 30px;
-    transition: all 0.3s ease;
-}
-
-.cta-button:hover {
-    background-color: white;
-    color: #1a1a2e;
-    transform: translateY(-2px);
-}
-
 /* About Section */
 .about {
     padding: 80px 0;
@@ -251,7 +212,7 @@ body {
 
 .section-title {
     font-size: 2.5rem;
-    font-weight: 700;
+    font-weight: 500;
     color: #1a1a2e;
     letter-spacing: 2px;
     margin: auto;
@@ -268,6 +229,9 @@ body {
     font-size: 1.1rem;
     margin-bottom: 1.5rem;
     color: #666;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .services-grid {
