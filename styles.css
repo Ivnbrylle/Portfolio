@@ -236,17 +236,54 @@ body {
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
     gap: 2rem;
     margin-top: 3rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.service-item:nth-child(3) {
+    grid-column: 1 / 3;
+    justify-self: center;
+    max-width: 400px;
 }
 
 .service-item {
+    position: relative;
     text-align: center;
     padding: 2rem;
     border-radius: 10px;
     background-color: #f8f9fa;
     transition: transform 0.3s ease;
+    overflow: hidden;
+}
+
+.service-background {
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.1;
+    z-index: 1;
+}
+
+.service-bg-image {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    opacity: 0.6;
+}
+
+.service-content {
+    position: relative;
+    z-index: 2;
+}
+
+.service-item:hover .service-background {
+    opacity: 0.15;
 }
 
 .service-item:hover {
@@ -551,6 +588,12 @@ body {
     
     .services-grid {
         grid-template-columns: 1fr;
+        max-width: 400px;
+    }
+    
+    .service-item:nth-child(3) {
+        grid-column: 1;
+        max-width: 100%;
     }
     
     .skills-grid {
@@ -581,6 +624,26 @@ body {
     
     .section-title {
         font-size: 2rem;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+        max-width: 350px;
+        gap: 1.5rem;
+    }
+    
+    .service-item:nth-child(3) {
+        grid-column: 1;
+        max-width: 100%;
+    }
+    
+    .service-background {
+        top: 0.5rem;
+    }
+    
+    .service-bg-image {
+        width: 50px;
+        height: 50px;
     }
     
     .skills-grid {
