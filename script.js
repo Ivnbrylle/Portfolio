@@ -93,6 +93,10 @@ document.addEventListener('DOMContentLoaded', function() {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
+            } else {
+                // Reset animation when element leaves viewport
+                entry.target.style.opacity = '0';
+                entry.target.style.transform = 'translateY(20px)';
             }
         });
     }, observerOptions);
