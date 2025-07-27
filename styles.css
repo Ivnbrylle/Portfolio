@@ -3,6 +3,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
 }
 
 body {
@@ -10,6 +15,71 @@ body {
     line-height: 1.6;
     color: #333;
     background-color: rgba(255, 255, 255, 1);
+}
+
+img {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    pointer-events: auto;
+    cursor: default;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Prevent text cursor on interactive elements and containers */
+.skill-item, .skill-icon-container, .skill-icon, .skill-label,
+.service-item, .service-background, .service-bg-image,
+.portfolio-image-container, .portfolio-image,
+.hero-image, .nav-logo, .social-links, .social-link,
+.navbar, .hamburger, .bar {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+
+/* Ensure proper cursor for clickable elements */
+button, .submit-btn, .contact-btn, a, .nav-link {
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Allow text selection and proper cursor for form elements and selectable content */
+input, textarea, input[type="text"], input[type="email"], 
+input:focus, textarea:focus {
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
+    user-select: text !important;
+    cursor: text !important;
+}
+
+/* Allow text selection for readable content */
+p, .about-text p, .portfolio-description, .contact-description,
+.hero-greeting, .hero-title {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+    cursor: text;
+}
+
+/* Ensure sections and containers don't show text cursor */
+section, div, .hero, .about, .skills, .portfolio, .contact, .footer,
+.hero-container, .container, .nav-container, .hero-content {
+    cursor: default !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
 }
 
 .container {
