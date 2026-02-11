@@ -1,52 +1,40 @@
-# AWS-Hosted Cloud Engineering Portfolio
+# AWS Cloud Portfolio: Architected & Automated
 
-A high-performance, secure, and automated personal portfolio hosted on AWS. This project demonstrates proficiency in cloud architecture, DNS management, and SSL/TLS security.
+A modern, high-performance personal portfolio built using a cloud-native architecture. This project showcases full-stack cloud skills, including hosting, global delivery, DNS security, and automated CI/CD.
 
-## 🏗️ Architecture Overview
+## 🚀 Live Site
+Check it out at: [ivanrempis.dev](https://ivanrempis.dev)
 
-The project follows a standard cloud-native pattern for hosting static content with global delivery and security.
+## 🏗️ Technical Architecture
 
 
-### Components
-* **Storage:** Amazon S3 (Static Website Hosting)
-* **Content Delivery:** Amazon CloudFront (CDN)
-* **Security:** AWS Certificate Manager (ACM) - SSL/TLS
-* **DNS Management:** Amazon Route 53 (Authoritative DNS)
-* **Domain Registrar:** Name.com
+### Infrastructure & Security
+* **Storage:** Amazon S3 (Static Website Hosting) for reliable object storage.
+* **CDN:** Amazon CloudFront for low-latency global delivery and SSL termination.
+* **DNS:** Amazon Route 53 (Authoritative DNS) with Name.com as the registrar.
+* **Security:** AWS Certificate Manager (ACM) providing full HTTPS encryption via SSL/TLS.
 
----
-
-## 🛠️ Implementation Steps
-
-### 1. Storage & Hosting (Amazon S3)
-* **Bucket Configuration:** Created a public S3 bucket with "Static Website Hosting" enabled.
-* **Bucket Policy:** Configured a policy to allow `s3:GetObject` for public read access.
-* **Key Learning:** Ensure the bucket region matches your primary target audience for lower latency.
-
-### 2. Security & SSL (AWS Certificate Manager)
-* **Certificate Generation:** Requested a public certificate for `ivanrempis.dev` and `*.ivanrempis.dev`.
-* **Validation:** Performed DNS validation by adding CNAME records to the authoritative DNS manager.
-* **Region Note:** For CloudFront integration, the ACM certificate must be issued in the **us-east-1 (N. Virginia)** region.
-
-### 3. Global Delivery (Amazon CloudFront)
-* **Distribution:** Set up a CloudFront distribution pointing to the S3 website endpoint.
-* **Alternate Domain Names (CNAMEs):** Configured both the root (`ivanrempis.dev`) and subdomain (`www.ivanrempis.dev`) to ensure universal access.
-* **Protocol Policy:** Enabled "Redirect HTTP to HTTPS" to ensure all traffic is encrypted.
-* **Troubleshooting:** Resolved an issue where an incorrect **Origin Path** (`/https`) caused 404/403 errors by reverting it to the root directory.
-
-### 4. DNS Routing (Amazon Route 53)
-* **Nameserver Migration:** Transitioned DNS management from Name.com to Route 53 by updating the nameservers at the registrar level.
-* **Alias Records:** Utilized Route 53 "Alias" records to point the apex domain directly to the CloudFront distribution—a feature not supported by standard CNAME records.
-* **ISP Latency:** Documented the observation that DNS propagation can take 24–48 hours, often appearing as "Timeouts" in local `nslookup` queries while being live globally.
+### Automation (CI/CD)
+* **Pipeline:** GitHub Actions.
+* **Workflow:** Every `git push` to the `main` branch triggers an automated sync to S3 and a cache invalidation for global CloudFront distributions.
 
 ---
 
-## 🚀 Future Enhancements (CI/CD)
-Currently implementing **GitHub Actions** to automate the deployment process:
-* Automated `s3 sync` on every `git push`.
-* Automated CloudFront Cache Invalidation to ensure updates are visible instantly.
+## 🛠️ Challenges & Key Learnings
+
+### 1. DNS Propagation & ISP Latency
+* **Challenge:** Encountered `nslookup` timeouts despite correct Route 53 configuration.
+* **Lesson:** Documented the reality of global DNS propagation (24–48 hours) and learned how to verify nameserver "handshakes" using global propagation tools.
+
+### 2. CloudFront CNAME & Origin Resolution
+* **Challenge:** Site failed to resolve for the root domain and returned 403/404 errors due to an incorrect "Origin Path."
+* **Solution:** Configured both apex (`ivanrempis.dev`) and subdomain (`www`) in Alternate Domain Names and removed unnecessary subdirectory paths to align with the S3 root object.
+
+### 3. Automated Invalidation (The "Instant" Update)
+* **Challenge:** New code changes in S3 weren't visible due to CloudFront’s edge caching.
+* **Implementation:** Integrated `aws cloudfront create-invalidation` into the CI/CD pipeline to clear the cache for multiple distributions automatically upon deployment.
+
+---
 
 ## 👨‍💻 Author
-**IvanRempis**
-* 4th Year Student | Cloud Engineering Aspirant
-* University Of The East Manila
+**Ivan Rempis** *4th Year College Student | Cloud Engineering Aspirant
