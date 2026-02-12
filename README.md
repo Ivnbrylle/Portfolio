@@ -1,40 +1,46 @@
 # AWS Cloud Portfolio: Architected & Automated
+A modern, high-performance personal portfolio built using a cloud-native, serverless architecture. This project showcases Infrastructure as Code (IaC), automated CI/CD, and a secure backend pipeline.
 
-A modern, high-performance personal portfolio built using a cloud-native architecture. This project showcases full-stack cloud skills, including hosting, global delivery, DNS security, and automated CI/CD.
+🚀 Live Site
+Check it out at: ivanrempis.dev
 
-## 🚀 Live Site
-Check it out at: [ivanrempis.dev](https://ivanrempis.dev)
+🏗️ Technical Architecture
+1. Infrastructure as Code (IaC)
+Terraform: Used for 100% of resource provisioning, ensuring consistency and version control.
 
-## 🏗️ Technical Architecture
+Remote State Management: Implemented an S3 backend with DynamoDB State Locking to prevent concurrent execution and ensure safe collaborative updates.
 
+2. Serverless Backend Pipeline
+API Layer: Amazon API Gateway (HTTP API) provides a secure, low-latency entry point with Rate Limiting implemented for DDoS protection.
 
-### Infrastructure & Security
-* **Storage:** Amazon S3 (Static Website Hosting) for reliable object storage.
-* **CDN:** Amazon CloudFront for low-latency global delivery and SSL termination.
-* **DNS:** Amazon Route 53 (Authoritative DNS) with Name.com as the registrar.
-* **Security:** AWS Certificate Manager (ACM) providing full HTTPS encryption via SSL/TLS.
+Compute: AWS Lambda (Python 3.12) processes contact form data and manages multi-service integration.
 
-### Automation (CI/CD)
-* **Pipeline:** GitHub Actions.
-* **Workflow:** Every `git push` to the `main` branch triggers an automated sync to S3 and a cache invalidation for global CloudFront distributions.
+NoSQL Storage: Amazon DynamoDB stores messages in a cost-efficient, pay-per-request model.
 
----
+Notifications: Amazon SES triggers automated Gmail alerts for real-time contact notifications.
 
-## 🛠️ Challenges & Key Learnings
+3. Frontend & Global Delivery
+Storage: Amazon S3 (Static Website Hosting).
 
-### 1. DNS Propagation & ISP Latency
-* **Challenge:** Encountered `nslookup` timeouts despite correct Route 53 configuration.
-* **Lesson:** Documented the reality of global DNS propagation (24–48 hours) and learned how to verify nameserver "handshakes" using global propagation tools.
+CDN: Amazon CloudFront for low-latency global delivery and SSL termination.
 
-### 2. CloudFront CNAME & Origin Resolution
-* **Challenge:** Site failed to resolve for the root domain and returned 403/404 errors due to an incorrect "Origin Path."
-* **Solution:** Configured both apex (`ivanrempis.dev`) and subdomain (`www`) in Alternate Domain Names and removed unnecessary subdirectory paths to align with the S3 root object.
+DNS: Amazon Route 53 with ACM for full HTTPS encryption.
 
-### 3. Automated Invalidation (The "Instant" Update)
-* **Challenge:** New code changes in S3 weren't visible due to CloudFront’s edge caching.
-* **Implementation:** Integrated `aws cloudfront create-invalidation` into the CI/CD pipeline to clear the cache for multiple distributions automatically upon deployment.
+🛠️ Key Technical Challenges & Solutions
+1. Transitioning to IaC (Remote State)
+Challenge: Managing infrastructure manually in the AWS Console led to "configuration drift."
 
----
+Solution: Bootstrapped a Terraform remote backend. This taught me the "chicken-and-egg" problem of using Terraform to build its own state-management resources.
 
-## 👨‍💻 Author
-**Ivan Rempis** *4th Year College Student | Cloud Engineering Aspirant
+2. DDoS Mitigation & Cost Control
+Challenge: Serverless architectures are elastically scalable but can lead to unexpected costs if attacked.
+
+Solution: Implemented API Gateway Throttling (5 requests/sec) to drop malicious traffic before it triggers costly downstream compute or storage.
+
+3. IAM Policy Hardening
+Challenge: Ensuring the "Principle of Least Privilege" for the Lambda execution role.
+
+Solution: Refined IAM policies to limit permissions specifically to dynamodb:PutItem and ses:SendEmail on specific resources rather than using broad administrative access.
+
+👨‍💻 Author
+Ivan Rempis 4th Year Computer Science Student | University of the East - Manila Aspiring Cloud Engineer
