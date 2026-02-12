@@ -434,8 +434,48 @@ section, div, .hero, .about, .skills, .portfolio, .contact, .footer,
 /* Skills Section */
 .skills {
     padding: 80px 0;
-    padding-bottom: 0;
     background: #1a1a1a;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.skill-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.skill-icon-container {
+    width: 70px;
+    height: 70px;
+    background: #e8e8e8;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.skill-icon-container:hover {
+    transform: translateY(-5px);
+}
+
+.skill-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.skill-label {
+    font-size: 0.85rem;
+    color: #9a9a9a;
+    font-weight: 500;
 }
 
 /* Skills Marquee */
@@ -444,7 +484,7 @@ section, div, .hero, .about, .skills, .portfolio, .contact, .footer,
     overflow: hidden;
     padding: 40px 0;
     margin-top: 30px;
-    background: #1e1e1e;
+    background: #1a1a1a;
     position: relative;
 }
 
@@ -461,12 +501,12 @@ section, div, .hero, .about, .skills, .portfolio, .contact, .footer,
 
 .skills-marquee::before {
     left: 0;
-    background: linear-gradient(90deg, #1e1e1e 0%, transparent 100%);
+    background: linear-gradient(90deg, #1a1a1a 0%, transparent 100%);
 }
 
 .skills-marquee::after {
     right: 0;
-    background: linear-gradient(270deg, #1e1e1e 0%, transparent 100%);
+    background: linear-gradient(270deg, #1a1a1a 0%, transparent 100%);
 }
 
 .marquee-track {
@@ -491,11 +531,13 @@ section, div, .hero, .about, .skills, .portfolio, .contact, .footer,
     height: 60px;
     object-fit: contain;
     padding: 12px;
-    background: #e8e8e8;
+    background: rgba(255, 255, 255, 0.08);
     border-radius: 12px;
     border: none;
     transition: all 0.3s ease;
     box-shadow: none;
+    opacity: 0.4;
+    filter: grayscale(100%);
 }
 
 .marquee-content img:hover {
@@ -744,6 +786,11 @@ section, div, .hero, .about, .skills, .portfolio, .contact, .footer,
     .service-item:nth-child(3) {
         grid-column: auto;
         max-width: 100%;
+    }
+    
+    .skills-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
     }
     
     .hero-image {
