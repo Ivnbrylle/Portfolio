@@ -822,7 +822,7 @@ section, div, .hero, .about, .skills, .portfolio, .contact, .footer,
     }
     
     .footer-content {
-        flex-direction: column;
+        flex-direction: column-reverse;
         gap: 1rem;
         text-align: center;
     }
