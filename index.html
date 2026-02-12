@@ -277,11 +277,7 @@
                 Let's work together to bring your ideas to life. Feel free to reach out for collaborations or just a friendly hello!
             </p>
             
-            <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-                <input type="hidden" name="form-name" value="contact">
-                <p style="display: none;">
-                    <label>Don't fill this out if you're human: <input name="bot-field" /></label>
-                </p>
+            <form id="contact-form" class="contact-form">
                 <div class="form-group">
                     <input type="text" id="name" name="name" placeholder="Your Name" required>
                 </div>
@@ -294,7 +290,8 @@
                 <div class="form-group">
                     <textarea id="message" name="message" placeholder="Your Message" rows="6" required></textarea>
                 </div>
-                <button type="submit" class="submit-btn">SUBMIT</button>
+                <button type="submit" id="submit-btn" class="submit-btn">SUBMIT</button>
+                <p id="response-msg" class="response-msg"></p>
             </form>
         </div>
     </section>

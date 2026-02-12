@@ -59,40 +59,51 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', updateActiveNav);
 
     // Form submission
-    const contactForm = document.querySelector('.contact-form');
-    contactForm.addEventListener('submit', function(e) {
+    const contactForm = document.getElementById('contact-form');
+    const responseMsg = document.getElementById('response-msg');
+
+    contactForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         
-        // Get form data
-        const formData = new FormData(contactForm);
-        const submitBtn = contactForm.querySelector('.submit-btn');
-        const originalText = submitBtn.textContent;
-        
-        // Show loading state
-        submitBtn.textContent = 'SENDING...';
-        submitBtn.disabled = true;
+        // Gather the data from the inputs
+        const formData = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            subject: document.getElementById('subject').value,
+            message: document.getElementById('message').value
+        };
 
-        // Submit to Netlify
-        fetch('/', {
-            method: 'POST',
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams(formData).toString()
-        })
-        .then(() => {
-            // Success
-            alert('Thank you for your message! I\'ll get back to you soon.');
-            contactForm.reset();
-        })
-        .catch((error) => {
-            // Error
-            alert('Sorry, there was an error sending your message. Please try again.');
+        // Change button state to show it's working
+        const btn = document.getElementById('submit-btn');
+        btn.innerText = "SENDING...";
+        btn.disabled = true;
+
+        try {
+            // Send the data to AWS API Gateway
+            const response = await fetch('https://y18blsqg1d.execute-api.ap-southeast-1.amazonaws.com/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            // Handle the response
+            if (response.ok) {
+                responseMsg.innerHTML = "Message sent successfully! I'll get back to you soon.";
+                responseMsg.style.color = '#4CAF50';
+                contactForm.reset();
+            } else {
+                throw new Error('Server responded with an error');
+            }
+        } catch (error) {
             console.error('Error:', error);
-        })
-        .finally(() => {
-            // Reset button
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-        });
+            responseMsg.innerHTML = "Oops! Something went wrong. Please try again.";
+            responseMsg.style.color = '#f44336';
+        } finally {
+            btn.innerText = "SUBMIT";
+            btn.disabled = false;
+        }
     });
 
     // Intersection Observer for animations

@@ -690,6 +690,13 @@ section, div, .hero, .about, .skills, .portfolio, .contact, .footer,
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
+.response-msg {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 1rem;
+    min-height: 1.5rem;
+}
+
 /* Footer */
 .footer {
     background: #1a1a1a;
