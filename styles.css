@@ -531,12 +531,12 @@ section, div, .hero, .about, .skills, .portfolio, .contact, .footer,
     height: 60px;
     object-fit: contain;
     padding: 12px;
-    background: rgba(255, 255, 255, 0.08);
+    background: #333333;
     border-radius: 12px;
     border: none;
     transition: all 0.3s ease;
     box-shadow: none;
-    opacity: 0.4;
+    opacity: 0.5;
     filter: grayscale(100%);
 }
 
