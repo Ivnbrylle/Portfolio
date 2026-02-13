@@ -1,10 +1,10 @@
 # AWS Cloud Portfolio: Architected & Automated
 A modern, high-performance personal portfolio built using a cloud-native, serverless architecture. This project showcases Infrastructure as Code (IaC), automated CI/CD, and a secure backend pipeline.
 
-🚀 Live Site
+Live Site
 Check it out at: ivanrempis.dev
 
-🏗️ Technical Architecture
+Technical Architecture
 1. Infrastructure as Code (IaC)
 Terraform: Used for 100% of resource provisioning, ensuring consistency and version control.
 
