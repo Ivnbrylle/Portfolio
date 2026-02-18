@@ -345,13 +345,21 @@ document.head.appendChild(style);
             name: 'AWS Simulearn: Cloud Practitioner'
         },
         {
+            certificate: 'Downloads/awsessentials.jpg',
+            name: 'AWS Technical Essentials'
+        },
+        {
+            certificate: 'Downloads/awsmicrodential.jpg',
+            name: 'AWS Microdential Preview'
+        },
+        {
             certificate: 'Downloads/introcyber.jpg',
             name: 'Introduction to Cybersecurity'
         },
         {
             certificate: 'Downloads/networking.jpg',
             name: 'Networking Basics'
-        }
+        },
     ];
     
 
