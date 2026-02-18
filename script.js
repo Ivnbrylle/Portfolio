@@ -184,6 +184,122 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('load', function() {
         document.body.classList.add('loaded');
     });
+
+    // AWS Projects Modal Functionality
+    const projectModal = document.getElementById('project-modal');
+    const deepDiveButtons = document.querySelectorAll('.btn-deep-dive');
+    const modalClose = document.querySelector('.modal-close');
+    const resilienceContent = document.getElementById('resilience-content');
+    const janitorContent = document.getElementById('janitor-content');
+
+    // Open modal with corresponding project content
+    deepDiveButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const project = this.getAttribute('data-project');
+            
+            // Hide all project contents
+            if (resilienceContent) resilienceContent.style.display = 'none';
+            if (janitorContent) janitorContent.style.display = 'none';
+            
+            // Show selected project content
+            if (project === 'resilience' && resilienceContent) {
+                resilienceContent.style.display = 'block';
+            } else if (project === 'janitor' && janitorContent) {
+                janitorContent.style.display = 'block';
+            }
+            
+            // Show modal
+            if (projectModal) {
+                projectModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    });
+
+    // Close modal
+    if (modalClose) {
+        modalClose.addEventListener('click', function() {
+            projectModal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    }
+
+    // Close modal on outside click
+    if (projectModal) {
+        projectModal.addEventListener('click', function(e) {
+            if (e.target === projectModal) {
+                projectModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    }
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && projectModal && projectModal.classList.contains('active')) {
+            projectModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+
+    // Image Lightbox Functionality
+    const imageLightbox = document.getElementById('image-lightbox');
+    const lightboxImage = document.querySelector('.lightbox-image');
+    const lightboxClose = document.querySelector('.lightbox-close');
+    const architectureDiagrams = document.querySelectorAll('.architecture-diagram, .modal-diagram');
+
+    // Open lightbox when clicking on architecture diagrams
+    architectureDiagrams.forEach(diagram => {
+        diagram.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (imageLightbox && lightboxImage) {
+                lightboxImage.src = this.src;
+                lightboxImage.alt = this.alt;
+                imageLightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    });
+
+    // Close lightbox
+    if (lightboxClose) {
+        lightboxClose.addEventListener('click', function() {
+            imageLightbox.classList.remove('active');
+            document.body.style.overflow = projectModal && projectModal.classList.contains('active') ? 'hidden' : '';
+        });
+    }
+
+    // Close lightbox on outside click
+    if (imageLightbox) {
+        imageLightbox.addEventListener('click', function(e) {
+            if (e.target === imageLightbox || e.target === lightboxImage) {
+                imageLightbox.classList.remove('active');
+                document.body.style.overflow = projectModal && projectModal.classList.contains('active') ? 'hidden' : '';
+            }
+        });
+    }
+
+    // Close lightbox on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && imageLightbox && imageLightbox.classList.contains('active')) {
+            imageLightbox.classList.remove('active');
+            document.body.style.overflow = projectModal && projectModal.classList.contains('active') ? 'hidden' : '';
+        }
+    });
+
+    // Diagram overlay click handler for project cards
+    const diagramOverlays = document.querySelectorAll('.diagram-overlay');
+    diagramOverlays.forEach(overlay => {
+        overlay.addEventListener('click', function() {
+            const diagram = this.previousElementSibling;
+            if (diagram && imageLightbox && lightboxImage) {
+                lightboxImage.src = diagram.src;
+                lightboxImage.alt = diagram.alt;
+                imageLightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    });
 });
 
 // Hamburger menu animation

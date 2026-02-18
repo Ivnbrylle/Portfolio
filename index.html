@@ -30,6 +30,9 @@
                     <a href="#portfolio" class="nav-link">Portfolio</a>
                 </li>
                 <li class="nav-item">
+                    <a href="#aws-projects" class="nav-link">AWS Projects</a>
+                </li>
+                <li class="nav-item">
                     <a href="#contact" class="nav-link contact-btn">Contact</a>
                 </li>
             </ul>
@@ -189,7 +192,7 @@
     <!-- Portfolio Section -->
     <section id="portfolio" class="portfolio">
         <div class="container">
-            <h2 class="section-title">PORTFOLIO</h2>
+            <h2 class="section-title">PROJECTS</h2>
             <div class="portfolio-content">
                 <div class="portfolio-left">
                     <div class="portfolio-image-container">
@@ -221,6 +224,306 @@
         </div>
     </section>
 
+    <!-- AWS Projects Section -->
+    <section id="aws-projects" class="aws-projects">
+        <div class="container">
+            <h2 class="section-title">AWS PROJECTS</h2>
+            <p class="aws-section-description">
+                Cloud engineering projects showcasing infrastructure automation, high availability architectures, and DevOps practices on AWS.
+            </p>
+            
+            <div class="aws-projects-grid">
+                <!-- Project Resilience Card -->
+                <div class="aws-project-card">
+                    <div class="project-card-image">
+                        <img src="Downloads/project-resilience-arch.svg" alt="Project Resilience Architecture Diagram" class="architecture-diagram">
+                        <div class="diagram-overlay">
+                            <span>Click to expand</span>
+                        </div>
+                    </div>
+                    <div class="project-card-content">
+                        <h3 class="project-card-title">Project Resilience</h3>
+                        <p class="project-card-subtitle">Self-Healing 3-Tier Architecture</p>
+                        <ul class="project-highlights">
+                            <li><i class="fas fa-check-circle"></i> Deployed a 3-tier architecture in ap-southeast-1 using Terraform</li>
+                            <li><i class="fas fa-check-circle"></i> Implemented self-healing logic via EventBridge and Discord notifications</li>
+                            <li><i class="fas fa-check-circle"></i> Reduced manual recovery time to near-zero</li>
+                        </ul>
+                        <div class="project-card-actions">
+                            <button class="btn-deep-dive" data-project="resilience">View Deep-Dive</button>
+                            <a href="#" class="btn-linkedin" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-linkedin-in"></i> Read Full Engineering Deep-Dive
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cloud Janitor Card -->
+                <div class="aws-project-card">
+                    <div class="project-card-image">
+                        <img src="Downloads/cloud-janitor-arch.svg" alt="Cloud Janitor Architecture Diagram" class="architecture-diagram">
+                        <div class="diagram-overlay">
+                            <span>Click to expand</span>
+                        </div>
+                    </div>
+                    <div class="project-card-content">
+                        <h3 class="project-card-title">Cloud Janitor</h3>
+                        <p class="project-card-subtitle">Automated Resource Cleanup Solution</p>
+                        <ul class="project-highlights">
+                            <li><i class="fas fa-check-circle"></i> Built serverless cleanup automation using Lambda and EventBridge</li>
+                            <li><i class="fas fa-check-circle"></i> Implemented cost optimization through unused resource detection</li>
+                            <li><i class="fas fa-check-circle"></i> Achieved 40% reduction in monthly cloud spend</li>
+                        </ul>
+                        <div class="project-card-actions">
+                            <button class="btn-deep-dive" data-project="janitor">View Deep-Dive</button>
+                            <a href="#" class="btn-linkedin" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-linkedin-in"></i> Read Full Engineering Deep-Dive
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Deep-Dive Modal -->
+    <div id="project-modal" class="project-modal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            
+            <!-- Project Resilience Deep-Dive -->
+            <div id="resilience-content" class="modal-project-content">
+                <h2 class="modal-title">Project Resilience</h2>
+                <p class="modal-subtitle">Self-Healing 3-Tier Architecture on AWS</p>
+                
+                <div class="deep-dive-section">
+                    <h3><i class="fas fa-exclamation-triangle"></i> The Problem</h3>
+                    <p class="problem-text">
+                        Manual remediation of Nginx failures was causing <strong>15-minute downtimes</strong> during off-hours. 
+                        The traditional approach required human intervention to detect, diagnose, and restart failed services, 
+                        leading to poor user experience and potential SLA breaches.
+                    </p>
+                </div>
+
+                <div class="deep-dive-section">
+                    <h3><i class="fas fa-lightbulb"></i> The Solution</h3>
+                    <p>
+                        Implemented an <strong>event-driven self-healing architecture</strong> that automatically detects and recovers from failures:
+                    </p>
+                    <ul class="solution-list">
+                        <li>ALB health checks continuously monitor EC2 instances running Nginx</li>
+                        <li>CloudWatch Alarms trigger on unhealthy target status</li>
+                        <li>EventBridge rules invoke Lambda functions for automated remediation</li>
+                        <li>Auto Scaling Group replaces unhealthy instances automatically</li>
+                        <li>Discord webhooks provide real-time incident notifications</li>
+                    </ul>
+                </div>
+
+                <div class="deep-dive-section">
+                    <h3><i class="fas fa-project-diagram"></i> Architecture Diagram</h3>
+                    <div class="modal-diagram-container">
+                        <img src="Downloads/project-resilience-arch.svg" alt="Project Resilience Full Architecture" class="modal-diagram">
+                    </div>
+                </div>
+
+                <div class="deep-dive-section">
+                    <h3><i class="fas fa-code"></i> Infrastructure as Code</h3>
+                    <p class="iac-intro">Terraform configuration for the Auto Scaling Group:</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Terraform</span>
+                            <span class="code-file">asg.tf</span>
+                        </div>
+<pre><code class="language-hcl">resource "aws_autoscaling_group" "web_asg" {
+  name                = "resilience-web-asg"
+  desired_capacity    = 2
+  max_size            = 4
+  min_size            = 1
+  target_group_arns   = [aws_lb_target_group.web_tg.arn]
+  vpc_zone_identifier = aws_subnet.private[*].id
+
+  launch_template {
+    id      = aws_launch_template.web_lt.id
+    version = "$Latest"
+  }
+
+  health_check_type         = "ELB"
+  health_check_grace_period = 300
+
+  tag {
+    key                 = "Name"
+    value               = "resilience-web-server"
+    propagate_at_launch = true
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="deep-dive-section">
+                    <h3><i class="fas fa-chart-line"></i> The Results</h3>
+                    <div class="results-grid">
+                        <div class="result-metric">
+                            <span class="metric-value">90%</span>
+                            <span class="metric-label">Reduction in MTTR</span>
+                            <span class="metric-detail">Mean Time To Recovery</span>
+                        </div>
+                        <div class="result-metric">
+                            <span class="metric-value">&lt;30s</span>
+                            <span class="metric-label">Detection Time</span>
+                            <span class="metric-detail">From 15 minutes manual</span>
+                        </div>
+                        <div class="result-metric">
+                            <span class="metric-value">99.9%</span>
+                            <span class="metric-label">Uptime Achieved</span>
+                            <span class="metric-detail">Singapore region (ap-southeast-1)</span>
+                        </div>
+                        <div class="result-metric">
+                            <span class="metric-value">0</span>
+                            <span class="metric-label">Manual Interventions</span>
+                            <span class="metric-detail">Fully automated recovery</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="deep-dive-section">
+                    <h3><i class="fas fa-tools"></i> Technologies Used</h3>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Terraform</span>
+                        <span class="tech-tag">AWS EC2</span>
+                        <span class="tech-tag">ALB</span>
+                        <span class="tech-tag">Auto Scaling</span>
+                        <span class="tech-tag">EventBridge</span>
+                        <span class="tech-tag">Lambda</span>
+                        <span class="tech-tag">CloudWatch</span>
+                        <span class="tech-tag">RDS MySQL</span>
+                        <span class="tech-tag">Discord Webhooks</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cloud Janitor Deep-Dive -->
+            <div id="janitor-content" class="modal-project-content" style="display: none;">
+                <h2 class="modal-title">Cloud Janitor</h2>
+                <p class="modal-subtitle">Automated Resource Cleanup & Cost Optimization</p>
+                
+                <div class="deep-dive-section">
+                    <h3><i class="fas fa-exclamation-triangle"></i> The Problem</h3>
+                    <p class="problem-text">
+                        Orphaned resources and forgotten development environments were accumulating, 
+                        causing <strong>unnecessary cloud spend</strong> and security risks. Manual audits were 
+                        time-consuming and often missed resources across multiple regions.
+                    </p>
+                </div>
+
+                <div class="deep-dive-section">
+                    <h3><i class="fas fa-lightbulb"></i> The Solution</h3>
+                    <p>
+                        Built a <strong>serverless cleanup automation system</strong> that identifies and removes unused resources:
+                    </p>
+                    <ul class="solution-list">
+                        <li>EventBridge scheduled rules trigger daily cleanup scans</li>
+                        <li>Lambda functions identify resources based on tags and usage patterns</li>
+                        <li>SNS notifications alert before resource deletion</li>
+                        <li>DynamoDB tracks cleanup history and exemptions</li>
+                        <li>CloudFormation stacks auto-delete after TTL expiration</li>
+                    </ul>
+                </div>
+
+                <div class="deep-dive-section">
+                    <h3><i class="fas fa-project-diagram"></i> Architecture Diagram</h3>
+                    <div class="modal-diagram-container">
+                        <img src="Downloads/cloud-janitor-arch.svg" alt="Cloud Janitor Full Architecture" class="modal-diagram">
+                    </div>
+                </div>
+
+                <div class="deep-dive-section">
+                    <h3><i class="fas fa-code"></i> Infrastructure as Code</h3>
+                    <p class="iac-intro">Terraform configuration for the cleanup Lambda:</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Terraform</span>
+                            <span class="code-file">lambda.tf</span>
+                        </div>
+<pre><code class="language-hcl">resource "aws_lambda_function" "cloud_janitor" {
+  function_name = "cloud-janitor-cleanup"
+  role          = aws_iam_role.janitor_role.arn
+  handler       = "index.handler"
+  runtime       = "python3.11"
+  timeout       = 300
+  memory_size   = 256
+
+  filename         = data.archive_file.lambda_zip.output_path
+  source_code_hash = data.archive_file.lambda_zip.output_base64sha256
+
+  environment {
+    variables = {
+      DRY_RUN         = "false"
+      SLACK_WEBHOOK   = var.slack_webhook_url
+      RETENTION_DAYS  = "7"
+    }
+  }
+
+  tags = {
+    Project     = "CloudJanitor"
+    Environment = "Production"
+  }
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="deep-dive-section">
+                    <h3><i class="fas fa-chart-line"></i> The Results</h3>
+                    <div class="results-grid">
+                        <div class="result-metric">
+                            <span class="metric-value">40%</span>
+                            <span class="metric-label">Cost Reduction</span>
+                            <span class="metric-detail">Monthly cloud spend</span>
+                        </div>
+                        <div class="result-metric">
+                            <span class="metric-value">500+</span>
+                            <span class="metric-label">Resources Cleaned</span>
+                            <span class="metric-detail">In first month</span>
+                        </div>
+                        <div class="result-metric">
+                            <span class="metric-value">24/7</span>
+                            <span class="metric-label">Automated Scanning</span>
+                            <span class="metric-detail">Zero manual effort</span>
+                        </div>
+                        <div class="result-metric">
+                            <span class="metric-value">5 min</span>
+                            <span class="metric-label">Audit Time</span>
+                            <span class="metric-detail">Down from 4 hours</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="deep-dive-section">
+                    <h3><i class="fas fa-tools"></i> Technologies Used</h3>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Terraform</span>
+                        <span class="tech-tag">AWS Lambda</span>
+                        <span class="tech-tag">EventBridge</span>
+                        <span class="tech-tag">DynamoDB</span>
+                        <span class="tech-tag">SNS</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Boto3</span>
+                        <span class="tech-tag">CloudWatch</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Lightbox Modal -->
+    <div id="image-lightbox" class="image-lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-image" src="" alt="Architecture Diagram">
+    </div>
+
     <!-- Skills Marquee -->
     <div class="skills-marquee">
         <div class="marquee-track">
@@ -234,7 +537,6 @@
                 <img src="Downloads/mysql.png" alt="MySQL">
                 <img src="Downloads/python.png" alt="Python">
                 <img src="Downloads/English.svg" alt="English">
-                <img src="Downloads/C++.svg" alt="C++">
                 <img src="Downloads/java.png" alt="Java">
                 <img src="Downloads/figma.svg" alt="Figma">
                 <img src="Downloads/git_logo.png" alt="Git">
@@ -249,7 +551,6 @@
                 <img src="Downloads/mysql.png" alt="MySQL">
                 <img src="Downloads/python.png" alt="Python">
                 <img src="Downloads/English.svg" alt="English">
-                <img src="Downloads/C++.svg" alt="C++">
                 <img src="Downloads/java.png" alt="Java">
                 <img src="Downloads/figma.svg" alt="Figma">
                 <img src="Downloads/git_logo.png" alt="Git">
