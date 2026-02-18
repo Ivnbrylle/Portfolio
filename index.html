@@ -27,7 +27,7 @@
                     <a href="#skills" class="nav-link">Skills</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#portfolio" class="nav-link">Portfolio</a>
+                    <a href="#portfolio" class="nav-link">Projects</a>
                 </li>
                 <li class="nav-item">
                     <a href="#aws-projects" class="nav-link">AWS Projects</a>
@@ -198,21 +198,6 @@
                 </div>
             </div>
         </div>
-        <div class="container">
-            <div class="portfolio-content">
-                <div class="portfolio-left">
-                    <div class="portfolio-image-container">
-                        <img src="Downloads/supportTicket.png" alt="aqprime" class="portfolio-image">
-                    </div>
-                </div>
-                <div class="portfolio-right">
-                    <h2 class="portfolio-title">Support Management System</h2>
-                    <p class="portfolio-description">
-                        A web-based application for managing customer support tickets and interactions.
-                    </p>
-                </div>
-            </div>
-        </div>
     </section>
 
     <!-- AWS Projects Section -->
@@ -264,7 +249,7 @@
                 <!-- Cloud Janitor Card -->
                 <div class="aws-project-card">
                     <div class="project-card-image">
-                        <img src="Downloads/cloud-janitor-arch.svg" alt="Cloud Janitor Architecture Diagram" class="architecture-diagram">
+                        <img src="Downloads/awsjanitor.png" alt="Cloud Janitor Architecture Diagram" class="architecture-diagram">
                         <div class="diagram-overlay">
                             <span>Click to expand</span>
                         </div>
@@ -278,13 +263,13 @@
                         </div>
                         <p class="project-card-subtitle">Automated Resource Cleanup Solution</p>
                         <ul class="project-highlights">
-                            <li><i class="fas fa-check-circle"></i> Built serverless cleanup automation using Lambda and EventBridge</li>
-                            <li><i class="fas fa-check-circle"></i> Implemented cost optimization through unused resource detection</li>
-                            <li><i class="fas fa-check-circle"></i> Achieved 40% reduction in monthly cloud spend</li>
+                            <li><i class="fas fa-check-circle"></i> Automatically restarts failed services without human intervention.</li>
+                            <li><i class="fas fa-check-circle"></i> Moves from detection to recovery in seconds using an asynchronous pipeline.</li>
+                            <li><i class="fas fa-check-circle"></i> Features "Circuit Breaker" logic via maintenance tags to prevent interference with planned work.</li>
                         </ul>
                         <div class="project-card-actions">
                             <button class="btn-deep-dive" data-project="janitor">View Deep-Dive</button>
-                            <a href="#" class="btn-linkedin" target="_blank" rel="noopener noreferrer">
+                            <a href="https://www.linkedin.com/pulse/building-self-healing-cloud-my-journey-aws-janitor-ivan-brylle-rempis-eglmc" class="btn-linkedin" target="_blank" rel="noopener noreferrer">
                                 <i class="fab fa-linkedin-in"></i> Read Full Engineering Deep-Dive
                             </a>
                         </div>
@@ -295,6 +280,31 @@
                             <span class="status-region">Region: ap-southeast-1</span>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- Certifications Section -->
+            <div class="certifications-section">
+                <h3 class="certifications-title">Certifications</h3>
+                <p class="certifications-description">Professional certifications validating my cloud expertise and technical skills.</p>
+                
+                <div class="certifications-grid">
+                    <!-- Certification Card Placeholder -->
+                    <div class="certification-card">
+                        <div class="cert-glow"></div>
+                        <div class="cert-badge-container">
+                            <div class="cert-badge-placeholder">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                        </div>
+                        <div class="cert-info">
+                            <h4 class="cert-name">Coming Soon</h4>
+                            <p class="cert-issuer">AWS Certification</p>
+                            <span class="cert-status">In Progress</span>
+                        </div>
+                    </div>
+
+                    <!-- Add more certification cards as needed -->
                 </div>
             </div>
         </div>
@@ -404,71 +414,123 @@ resource "aws_security_group" "db_sg" {
 
             <!-- Cloud Janitor Deep-Dive -->
             <div id="janitor-content" class="modal-project-content" style="display: none;">
-                <h2 class="modal-title">Auto Rmediation</h2>
+                <h2 class="modal-title">Auto Remediation</h2>
                 <p class="modal-subtitle">Automated Resource Cleanup & Cost Optimization</p>
                 
                 <div class="deep-dive-section">
-                    <h3><i class="fas fa-exclamation-triangle"></i> The Problem</h3>
+                    <h3>The Problem</h3>
                     <p class="problem-text">
-                        Orphaned resources and forgotten development environments were accumulating, 
-                        causing <strong>unnecessary cloud spend</strong> and security risks. Manual audits were 
-                        time-consuming and often missed resources across multiple regions.
+                        In modern cloud environments, relying on manual SSH to fix a crashed service is slow and does not scale. 
+                        Manual intervention creates a bottleneck, increases <strong>Mean Time To Recovery (MTTR)</strong>, and often requires open SSH ports, 
+                        which increases the security attack surface.
                     </p>
                 </div>
 
                 <div class="deep-dive-section">
                     <h3>The Solution</h3>
                     <p>
-                        Built a <strong>serverless cleanup automation system</strong> that identifies and removes unused resources:
+                        I designed <strong>a pipeline </strong> that automates the entire detection-to-remediation lifecycle:
                     </p>
                     <ul class="solution-list">
-                        <li>EventBridge scheduled rules trigger daily cleanup scans</li>
-                        <li>Lambda functions identify resources based on tags and usage patterns</li>
-                        <li>SNS notifications alert before resource deletion</li>
-                        <li>DynamoDB tracks cleanup history and exemptions</li>
-                        <li>CloudFormation stacks auto-delete after TTL expiration</li>
+                        <li>Monitoring & Detection: CloudWatch Alarms monitor instance health; if a service crashes, the alarm state change triggers EventBridge.</li>
+                        <li>The "Brain" (Lambda): A Python-based Lambda function validates the environment, checking for a Maintenance tag to ensure safety.</li>
+                        <li>Secure Remediation: The system triggers AWS Systems Manager (SSM) to run a custom Command Document, restarting the service securely over the AWS backbone without needing open SSH ports.</li>
+                        <li>Real-time Observability: Automated logs are sent via Discord Webhooks, providing the specific cause and duration of downtime.</li>
                     </ul>
                 </div>
 
                 <div class="deep-dive-section">
                     <h3>Architecture Diagram</h3>
                     <div class="modal-diagram-container">
-                        <img src="Downloads/cloud-janitor-arch.svg" alt="Cloud Janitor Full Architecture" class="modal-diagram">
+                        <img src="Downloads/janitorstructure.png" alt="Cloud Janitor Full Architecture" class="modal-diagram">
                     </div>
                 </div>
 
                 <div class="deep-dive-section">
                     <h3>Infrastructure as Code</h3>
-                    <p class="iac-intro">Terraform configuration for the cleanup Lambda:</p>
+                    <p class="iac-intro">Here is the Python logic that serves as the system's circuit breaker, combined with the Terraform trigger:</p>
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">Terraform</span>
-                            <span class="code-file">lambda.tf</span>
+                            <span class="code-file">main.tf</span>
                         </div>
-<pre><code class="language-hcl">resource "aws_lambda_function" "cloud_janitor" {
-  function_name = "cloud-janitor-cleanup"
-  role          = aws_iam_role.janitor_role.arn
-  handler       = "index.handler"
-  runtime       = "python3.11"
-  timeout       = 300
-  memory_size   = 256
+<pre><code class="language-hcl"># IAM Policy for Lambda Hardening
+resource "aws_iam_role_policy" "lambda_policy" {
+  name = "lambda_janitor_permissions"
+  role = aws_iam_role.lambda_role.id
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      { 
+        Action   = ["ssm:SendCommand", "ec2:DescribeTags"], 
+        Effect   = "Allow", 
+        Resource = "*" 
+      },
+      { 
+        Action   = ["logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents"], 
+        Effect   = "Allow", 
+        Resource = "arn:aws:logs:*:*:*" 
+      }
+    ]
+  })
+}
 
-  filename         = data.archive_file.lambda_zip.output_path
-  source_code_hash = data.archive_file.lambda_zip.output_base64sha256
+# Intelligence Layer Configuration
+resource "aws_lambda_function" "janitor_brain" {
+  function_name    = "CloudJanitor_Remediation_Brain"
+  handler          = "lambda_function.lambda_handler"
+  runtime          = "python3.11"
 
   environment {
     variables = {
-      DRY_RUN         = "false"
-      SLACK_WEBHOOK   = var.slack_webhook_url
-      RETENTION_DAYS  = "7"
+      DISCORD_WEBHOOK_URL = var.discord_webhook_url
+      SSM_DOCUMENT_NAME   = aws_ssm_document.remediate_nginx.name
     }
   }
+}
 
-  tags = {
-    Project     = "CloudJanitor"
-    Environment = "Production"
-  }
-}</code></pre>
+# Cross-Service Permission
+resource "aws_lambda_permission" "allow_cloudwatch" {
+  statement_id  = "AllowExecutionFromCloudWatch"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.janitor_brain.function_name
+  principal     = "events.amazonaws.com"
+  source_arn    = aws_cloudwatch_event_rule.remediation_rule.arn
+}
+</code></pre>
+                    </div>
+                    <br>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Terraform</span>
+                            <span class="code-file">lambda_function</span>
+                        </div>
+<pre><code class="language-hcl">import boto3
+import os
+
+def lambda_handler(event, context):
+    ec2 = boto3.client('ec2')
+    ssm = boto3.client('ssm')
+    
+    # Validation: Maintenance Check
+    detail = event.get('detail', {})
+    metrics = detail.get('configuration', {}).get('metrics', [{}])
+    instance_id = metrics[0].get('metricStat', {}).get('metric', {}).get('dimensions', {}).get('InstanceId', 'Unknown')
+    
+    tags = ec2.describe_tags(Filters=[{'Name': 'resource-id', 'Values': [instance_id]}])['Tags']
+    is_maintenance = any(t['Key'] == 'Maintenance' and t['Value'].lower() == 'true' for t in tags)
+
+    if is_maintenance:
+        return {"status": "skipped", "reason": "Maintenance Mode Active"}
+
+    # Secure Remediation via SSM
+    ssm.send_command(
+        InstanceIds=[instance_id],
+        DocumentName=os.environ.get('SSM_DOCUMENT_NAME')
+    )
+    
+    return {"status": "success"}
+                </code></pre>
                     </div>
                 </div>
 
@@ -476,40 +538,31 @@ resource "aws_security_group" "db_sg" {
                     <h3>The Results</h3>
                     <div class="results-grid">
                         <div class="result-metric">
-                            <span class="metric-value">40%</span>
-                            <span class="metric-label">Cost Reduction</span>
-                            <span class="metric-detail">Monthly cloud spend</span>
+                            <span class="metric-value">90%</span>
+                            <span class="metric-label">Reduction in MTTR</span>
+                            <span class="metric-detail">System identifies and fixes failures in under 30 seconds, down from 15 minutes of manual detection.</span>
                         </div>
                         <div class="result-metric">
-                            <span class="metric-value">500+</span>
-                            <span class="metric-label">Resources Cleaned</span>
-                            <span class="metric-detail">In first month</span>
+                            <span class="metric-value">0</span>
+                            <span class="metric-label">Zero-Trust Security</span>
+                            <span class="metric-detail">Remediation occurs via SSM, allowing for the complete removal of public SSH access.</span>
                         </div>
                         <div class="result-metric">
                             <span class="metric-value">24/7</span>
-                            <span class="metric-label">Automated Scanning</span>
-                            <span class="metric-detail">Zero manual effort</span>
-                        </div>
-                        <div class="result-metric">
-                            <span class="metric-value">5 min</span>
-                            <span class="metric-label">Audit Time</span>
-                            <span class="metric-detail">Down from 4 hours</span>
+                            <span class="metric-label">Dynamic Observability</span>
+                            <span class="metric-detail">Real-time Discord notifications provide instant clarity on why a service failed./span>
                         </div>
                     </div>
                 </div>
 
                 <div class="deep-dive-section">
                     <h3>Technologies Used</h3>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Terraform</span>
-                        <span class="tech-tag">AWS Lambda</span>
-                        <span class="tech-tag">EventBridge</span>
-                        <span class="tech-tag">DynamoDB</span>
-                        <span class="tech-tag">SNS</span>
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Boto3</span>
-                        <span class="tech-tag">CloudWatch</span>
-                    </div>
+                    <ul class="tech-list">
+                        <li><strong>Cloud Provider:</strong> AWS (Region: ap-southeast-1)</li>
+                        <li><strong>Automation & IaC:</strong> Terraform, Python (Boto3), Bash, HCL.</li>
+                        <li><strong>AWS Services:</strong> EC2, Lambda, EventBridge, CloudWatch, Systems Manager (SSM), IAM.</li>
+                        <li><strong>Integrations:</strong> Discord API for real-time webhooks.</li>
+                    </ul>
                 </div>
             </div>
         </div>
