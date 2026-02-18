@@ -142,9 +142,9 @@
                 </div>
                 <div class="skill-item">
                     <div class="skill-icon-container">
-                        <img src="Downloads/azure.svg" alt="Azure" class="skill-icon">
+                        <img src="Downloads/terraform.svg" alt="Terraform" class="skill-icon">
                     </div>
-                    <span class="skill-label">Azure</span>
+                    <span class="skill-label">Terraform</span>
                 </div>
                 <div class="skill-item">
                     <div class="skill-icon-container">
@@ -163,18 +163,6 @@
                         <img src="Downloads/python.png" alt="Python" class="skill-icon">
                     </div>
                     <span class="skill-label">Python</span>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-icon-container">
-                        <img src="Downloads/C++.svg" alt="C++" class="skill-icon">
-                    </div>
-                    <span class="skill-label">C++</span>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-icon-container">
-                        <img src="Downloads/java.png" alt="Java" class="skill-icon">
-                    </div>
-                    <span class="skill-label">Java</span>
                 </div>
                 <div class="skill-item">
                     <div class="skill-icon-container">
@@ -239,18 +227,24 @@
                 <!-- Project Resilience Card -->
                 <div class="aws-project-card">
                     <div class="project-card-image">
-                        <img src="Downloads/project-resilience-arch.svg" alt="Project Resilience Architecture Diagram" class="architecture-diagram">
+                        <img src="Downloads/project-resilience-arch.png" alt="Project Resilience Architecture Diagram" class="architecture-diagram">
                         <div class="diagram-overlay">
                             <span>Click to expand</span>
                         </div>
                     </div>
                     <div class="project-card-content">
-                        <h3 class="project-card-title">Project Resilience</h3>
+                        <div class="project-card-header">
+                            <h3 class="project-card-title">Project Resilience</h3>
+                            <a href="https://github.com/Ivnbrylle/Project-Resilience" class="project-github-link" target="_blank" rel="noopener noreferrer" title="View on GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
                         <p class="project-card-subtitle">Self-Healing 3-Tier Architecture</p>
                         <ul class="project-highlights">
                             <li><i class="fas fa-check-circle"></i> Deployed a 3-tier architecture in ap-southeast-1 using Terraform</li>
                             <li><i class="fas fa-check-circle"></i> Implemented self-healing logic via EventBridge and Discord notifications</li>
                             <li><i class="fas fa-check-circle"></i> Reduced manual recovery time to near-zero</li>
+
                         </ul>
                         <div class="project-card-actions">
                             <button class="btn-deep-dive" data-project="resilience">View Deep-Dive</button>
@@ -258,12 +252,12 @@
                                 <i class="fab fa-linkedin-in"></i> Read Full Engineering Deep-Dive
                             </a>
                         </div>
-                        <a href="https://github.com/Ivnbrylle/project-resilience/actions" class="project-status" target="_blank" rel="noopener noreferrer" title="View GitHub Actions">
+                        <div class="project-status">
                             <span class="status-dot"></span>
                             <span class="status-text">Infrastructure: <strong>Healthy</strong></span>
                             <span class="status-separator">|</span>
                             <span class="status-region">Region: ap-southeast-1</span>
-                        </a>
+                        </div>
                     </div>
                 </div>
 
@@ -276,7 +270,12 @@
                         </div>
                     </div>
                     <div class="project-card-content">
-                        <h3 class="project-card-title">Cloud Janitor</h3>
+                        <div class="project-card-header">
+                            <h3 class="project-card-title">Auto Remediation</h3>
+                            <a href="https://github.com/Ivnbrylle/Auto-Remediation" class="project-github-link" target="_blank" rel="noopener noreferrer" title="View on GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
                         <p class="project-card-subtitle">Automated Resource Cleanup Solution</p>
                         <ul class="project-highlights">
                             <li><i class="fas fa-check-circle"></i> Built serverless cleanup automation using Lambda and EventBridge</li>
@@ -289,12 +288,12 @@
                                 <i class="fab fa-linkedin-in"></i> Read Full Engineering Deep-Dive
                             </a>
                         </div>
-                        <a href="https://github.com/Ivnbrylle/cloud-janitor/actions" class="project-status" target="_blank" rel="noopener noreferrer" title="View GitHub Actions">
+                        <div class="project-status">
                             <span class="status-dot"></span>
                             <span class="status-text">Infrastructure: <strong>Healthy</strong></span>
                             <span class="status-separator">|</span>
                             <span class="status-region">Region: ap-southeast-1</span>
-                        </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -312,117 +311,100 @@
                 <p class="modal-subtitle">Self-Healing 3-Tier Architecture on AWS</p>
                 
                 <div class="deep-dive-section">
-                    <h3><i class="fas fa-exclamation-triangle"></i> The Problem</h3>
+                    <h3>The Problem</h3>
                     <p class="problem-text">
-                        Manual remediation of Nginx failures was causing <strong>15-minute downtimes</strong> during off-hours. 
-                        The traditional approach required human intervention to detect, diagnose, and restart failed services, 
-                        leading to poor user experience and potential SLA breaches.
+                        Standard single-server deployments represent a <strong>Single Point of Failure (SPOF)</strong> If a single AWS Availability Zone (AZ) 
+                        down or a manual configuration error occurs, the entire application stays offline, leading to significant downtime and potential data loss. 
+                        I needed to move away from "manual, fragile setups" toward a system that is decoupled, secure, and self-healing.
                     </p>
                 </div>
 
                 <div class="deep-dive-section">
-                    <h3><i class="fas fa-lightbulb"></i> The Solution</h3>
+                    <h3>The Solution</h3>
                     <p>
-                        Implemented an <strong>event-driven self-healing architecture</strong> that automatically detects and recovers from failures:
+                        I engineered <strong>a production-grade 3-tier architecture </strong> in the ap-southeast-1 (Singapore) region. 
+                        The system is designed to "survive" by distributing workloads across multiple AZs and automating the recovery process. 
+                        Key solutions included:
                     </p>
                     <ul class="solution-list">
-                        <li>ALB health checks continuously monitor EC2 instances running Nginx</li>
-                        <li>CloudWatch Alarms trigger on unhealthy target status</li>
-                        <li>EventBridge rules invoke Lambda functions for automated remediation</li>
-                        <li>Auto Scaling Group replaces unhealthy instances automatically</li>
-                        <li>Discord webhooks provide real-time incident notifications</li>
+                        <li>High Availability: Distributing traffic via an ALB to an Auto Scaling Group.</li>
+                        <li>Data Durability: Utilizing RDS Multi-AZ for synchronous replication.</li>
+                        <li>Secure Networking: Isolating the Database and App tiers in Private Subnets.</li>
                     </ul>
                 </div>
 
                 <div class="deep-dive-section">
-                    <h3><i class="fas fa-project-diagram"></i> Architecture Diagram</h3>
+                    <h3>Architecture Diagram</h3>
                     <div class="modal-diagram-container">
-                        <img src="Downloads/project-resilience-arch.svg" alt="Project Resilience Full Architecture" class="modal-diagram">
+                        <img src="Downloads/project-resilience-arch.png" alt="Project Resilience Full Architecture" class="modal-diagram">
                     </div>
                 </div>
 
                 <div class="deep-dive-section">
-                    <h3><i class="fas fa-code"></i> Infrastructure as Code</h3>
-                    <p class="iac-intro">Terraform configuration for the Auto Scaling Group:</p>
+                    <h3>Infrastructure as Code</h3>
+                    <p class="iac-intro">Terraform configuration for the Security Group Nesting:</p>
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">Terraform</span>
                             <span class="code-file">asg.tf</span>
                         </div>
-<pre><code class="language-hcl">resource "aws_autoscaling_group" "web_asg" {
-  name                = "resilience-web-asg"
-  desired_capacity    = 2
-  max_size            = 4
-  min_size            = 1
-  target_group_arns   = [aws_lb_target_group.web_tg.arn]
-  vpc_zone_identifier = aws_subnet.private[*].id
+<pre><code class="language-hcl"># The "Chain of Trust": Only the App Tier can talk to the Database
+resource "aws_security_group" "db_sg" {
+  name        = "database-layer-security-group"
+  description = "Allow MySQL traffic from App Tier only"
+  vpc_id      = aws_vpc.main.id
 
-  launch_template {
-    id      = aws_launch_template.web_lt.id
-    version = "$Latest"
-  }
-
-  health_check_type         = "ELB"
-  health_check_grace_period = 300
-
-  tag {
-    key                 = "Name"
-    value               = "resilience-web-server"
-    propagate_at_launch = true
-  }
-
-  lifecycle {
-    create_before_destroy = true
+  ingress {
+    from_port       = 3306
+    to_port         = 3306
+    protocol        = "tcp"
+    # This is nesting: No IP addresses, just the App SG ID
+    security_groups = [aws_security_group.app_sg.id] 
   }
 }</code></pre>
                     </div>
                 </div>
 
                 <div class="deep-dive-section">
-                    <h3><i class="fas fa-chart-line"></i> The Results</h3>
+                    <h3>The Results</h3>
                     <div class="results-grid">
                         <div class="result-metric">
                             <span class="metric-value">90%</span>
-                            <span class="metric-label">Reduction in MTTR</span>
-                            <span class="metric-detail">Mean Time To Recovery</span>
+                            <span class="metric-label">MTTR Reduction</span>
+                            <span class="metric-detail">Drastically faster recovery from instance failures.</span>
                         </div>
                         <div class="result-metric">
                             <span class="metric-value">&lt;30s</span>
                             <span class="metric-label">Detection Time</span>
-                            <span class="metric-detail">From 15 minutes manual</span>
+                            <span class="metric-detail">Issues are identified and mitigated in seconds, not 15 mins.</span>
                         </div>
                         <div class="result-metric">
                             <span class="metric-value">99.9%</span>
                             <span class="metric-label">Uptime Achieved</span>
-                            <span class="metric-detail">Singapore region (ap-southeast-1)</span>
+                            <span class="metric-detail">Multi-AZ deployment ensures regional resilience.</span>
                         </div>
                         <div class="result-metric">
                             <span class="metric-value">0</span>
-                            <span class="metric-label">Manual Interventions</span>
-                            <span class="metric-detail">Fully automated recovery</span>
+                            <span class="metric-label">Interventions</span>
+                            <span class="metric-detail">Fully automated self-healing via ASG and EventBridge.</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="deep-dive-section">
-                    <h3><i class="fas fa-tools"></i> Technologies Used</h3>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Terraform</span>
-                        <span class="tech-tag">AWS EC2</span>
-                        <span class="tech-tag">ALB</span>
-                        <span class="tech-tag">Auto Scaling</span>
-                        <span class="tech-tag">EventBridge</span>
-                        <span class="tech-tag">Lambda</span>
-                        <span class="tech-tag">CloudWatch</span>
-                        <span class="tech-tag">RDS MySQL</span>
-                        <span class="tech-tag">Discord Webhooks</span>
-                    </div>
+                    <h3>Technologies Used</h3>
+                    <ul class="tech-list">
+                        <li><strong>Cloud:</strong> AWS (VPC, EC2, ALB, ASG, RDS MySQL, CloudWatch, EventBridge, Lambda).</li>
+                        <li><strong>IaC:</strong> Terraform (Remote State with S3/DynamoDB Locking).</li>
+                        <li><strong>DevOps:</strong> GitHub Actions for CI/CD, Discord Webhooks for real-time alerting.</li>
+                        <li><strong>Security:</strong> IAM (Least Privilege), Security Group Nesting.</li>
+                    </ul>
                 </div>
             </div>
 
             <!-- Cloud Janitor Deep-Dive -->
             <div id="janitor-content" class="modal-project-content" style="display: none;">
-                <h2 class="modal-title">Cloud Janitor</h2>
+                <h2 class="modal-title">Auto Rmediation</h2>
                 <p class="modal-subtitle">Automated Resource Cleanup & Cost Optimization</p>
                 
                 <div class="deep-dive-section">
@@ -435,7 +417,7 @@
                 </div>
 
                 <div class="deep-dive-section">
-                    <h3><i class="fas fa-lightbulb"></i> The Solution</h3>
+                    <h3>The Solution</h3>
                     <p>
                         Built a <strong>serverless cleanup automation system</strong> that identifies and removes unused resources:
                     </p>
@@ -449,14 +431,14 @@
                 </div>
 
                 <div class="deep-dive-section">
-                    <h3><i class="fas fa-project-diagram"></i> Architecture Diagram</h3>
+                    <h3>Architecture Diagram</h3>
                     <div class="modal-diagram-container">
                         <img src="Downloads/cloud-janitor-arch.svg" alt="Cloud Janitor Full Architecture" class="modal-diagram">
                     </div>
                 </div>
 
                 <div class="deep-dive-section">
-                    <h3><i class="fas fa-code"></i> Infrastructure as Code</h3>
+                    <h3>Infrastructure as Code</h3>
                     <p class="iac-intro">Terraform configuration for the cleanup Lambda:</p>
                     <div class="code-block">
                         <div class="code-header">
@@ -491,7 +473,7 @@
                 </div>
 
                 <div class="deep-dive-section">
-                    <h3><i class="fas fa-chart-line"></i> The Results</h3>
+                    <h3>The Results</h3>
                     <div class="results-grid">
                         <div class="result-metric">
                             <span class="metric-value">40%</span>
@@ -517,7 +499,7 @@
                 </div>
 
                 <div class="deep-dive-section">
-                    <h3><i class="fas fa-tools"></i> Technologies Used</h3>
+                    <h3>Technologies Used</h3>
                     <div class="tech-tags">
                         <span class="tech-tag">Terraform</span>
                         <span class="tech-tag">AWS Lambda</span>
@@ -547,12 +529,10 @@
                 <img src="Downloads/css.svg" alt="CSS3">
                 <img src="Downloads/Javascript.svg" alt="JavaScript">
                 <img src="Downloads/amazon.png" alt="Amazon Web Services">
-                <img src="Downloads/azure.svg" alt="Azure">
+                <img src="Downloads/terraform.svg" alt="Terraform">
                 <img src="Downloads/Php.svg" alt="PHP">
                 <img src="Downloads/mysql.png" alt="MySQL">
                 <img src="Downloads/python.png" alt="Python">
-                <img src="Downloads/English.svg" alt="English">
-                <img src="Downloads/java.png" alt="Java">
                 <img src="Downloads/figma.svg" alt="Figma">
                 <img src="Downloads/git_logo.png" alt="Git">
             </div>
@@ -561,12 +541,10 @@
                 <img src="Downloads/css.svg" alt="CSS3">
                 <img src="Downloads/Javascript.svg" alt="JavaScript">
                 <img src="Downloads/amazon.png" alt="Amazon Web Services">
-                <img src="Downloads/azure.svg" alt="Azure">
+                <img src="Downloads/terraform.svg" alt="Terraform">
                 <img src="Downloads/Php.svg" alt="PHP">
                 <img src="Downloads/mysql.png" alt="MySQL">
                 <img src="Downloads/python.png" alt="Python">
-                <img src="Downloads/English.svg" alt="English">
-                <img src="Downloads/java.png" alt="Java">
                 <img src="Downloads/figma.svg" alt="Figma">
                 <img src="Downloads/git_logo.png" alt="Git">
             </div>

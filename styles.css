@@ -445,8 +445,9 @@ section, div, .hero, .about, .skills, .portfolio, .contact, .footer,
 }
 
 .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 30px;
     margin-top: 50px;
 }
@@ -787,20 +788,11 @@ section, div, .hero, .about, .skills, .portfolio, .contact, .footer,
 .project-status {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     gap: 8px;
     margin-top: 1rem;
-    padding: 10px 16px;
-    background: rgba(74, 222, 128, 0.08);
-    border: 1px solid rgba(74, 222, 128, 0.2);
-    border-radius: 8px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.project-status:hover {
-    background: rgba(74, 222, 128, 0.15);
-    border-color: rgba(74, 222, 128, 0.4);
+    padding: 8px 0;
+    cursor: default;
 }
 
 .status-dot {
@@ -928,11 +920,42 @@ section, div, .hero, .about, .skills, .portfolio, .contact, .footer,
     padding: 1.5rem;
 }
 
+.project-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.3rem;
+}
+
+.project-github-link {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #606060;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.project-github-link:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.project-github-link i {
+    font-size: 1rem;
+}
+
 .project-card-title {
     font-size: 1.4rem;
     font-weight: 700;
     color: #ffffff;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0;
 }
 
 .project-card-subtitle {
@@ -1263,6 +1286,30 @@ section, div, .hero, .about, .skills, .portfolio, .contact, .footer,
     color: #ffffff;
 }
 
+/* Tech List (categorized format) */
+.tech-list {
+    background: #1a1a1a;
+    padding: 1.5rem 1.5rem 1.5rem 2.5rem;
+    border-radius: 8px;
+    list-style-type: disc;
+    margin: 0;
+}
+
+.tech-list li {
+    color: #e0e0e0;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 0.5rem;
+}
+
+.tech-list li:last-child {
+    margin-bottom: 0;
+}
+
+.tech-list li strong {
+    color: #ffffff;
+}
+
 /* Image Lightbox */
 .image-lightbox {
     display: none;
@@ -1371,7 +1418,6 @@ section, div, .hero, .about, .skills, .portfolio, .contact, .footer,
     }
     
     .skills-grid {
-        grid-template-columns: repeat(3, 1fr);
         gap: 25px;
     }
     
@@ -1387,10 +1433,6 @@ section, div, .hero, .about, .skills, .portfolio, .contact, .footer,
     
     .social-links {
         justify-content: center;
-    }
-    
-    .skills-grid {
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     }
     
     .portfolio-content {
@@ -1468,7 +1510,7 @@ section, div, .hero, .about, .skills, .portfolio, .contact, .footer,
     }
     
     .skills-grid {
-        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
     }
 
     /* AWS Projects Small Screen */
@@ -1492,8 +1534,8 @@ section, div, .hero, .about, .skills, .portfolio, .contact, .footer,
     /* Project Status Small Screen */
     .project-status {
         flex-wrap: wrap;
-        justify-content: center;
-        padding: 8px 12px;
+        justify-content: flex-end;
+        padding: 8px 0;
     }
 
     .status-separator {
@@ -1502,7 +1544,7 @@ section, div, .hero, .about, .skills, .portfolio, .contact, .footer,
 
     .status-region {
         width: 100%;
-        text-align: center;
+        text-align: right;
         margin-top: 4px;
     }
 }
