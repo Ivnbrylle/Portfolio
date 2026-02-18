@@ -335,3 +335,147 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// Certification Carousel
+(function() {
+    // Certifications data - Add your certifications here
+    const certifications = [
+        {
+            certificate: 'Downloads/awssimulearn.jpg',
+            name: 'AWS Simulearn: Cloud Practitioner'
+        },
+        {
+            certificate: 'Downloads/introcyber.jpg',
+            name: 'Introduction to Cybersecurity'
+        },
+        {
+            certificate: 'Downloads/networking.jpg',
+            name: 'Networking Basics'
+        }
+    ];
+    
+
+    // Badges data - Add your badges here (displayed in grid below certifications)
+    const badges = [
+        { image: 'Downloads/networkbadge.png', name: 'Network Basics' },
+        { image: 'Downloads/introcyberbadge.png', name: 'Introduction to Cybersecurity' },
+    ];
+
+    const slider = document.querySelector('.cert-slider');
+    const dotsContainer = document.querySelector('.cert-dots');
+    const badgesGrid = document.querySelector('.badges-grid');
+    const prevBtn = document.querySelector('.cert-prev');
+    const nextBtn = document.querySelector('.cert-next');
+    
+    if (!slider || !dotsContainer || !prevBtn || !nextBtn) return;
+
+    let currentIndex = 0;
+
+    // Generate slides from data
+    function generateSlides() {
+        slider.innerHTML = certifications.map((cert, index) => `
+            <div class="cert-slide ${index === 0 ? 'active' : ''}">
+                <div class="cert-landscape-container">
+                    <img src="${cert.certificate}" alt="${cert.name}" class="cert-landscape-image">
+                    <div class="cert-glow"></div>
+                </div>
+                <h4 class="cert-name">${cert.name}</h4>
+            </div>
+        `).join('');
+    }
+
+    // Generate badges grid
+    function generateBadges() {
+        if (!badgesGrid) return;
+        badgesGrid.innerHTML = badges.map(badge => `
+            <div class="badge-item">
+                <img src="${badge.image}" alt="${badge.name}" class="badge-image">
+            </div>
+        `).join('');
+    }
+
+    // Generate dots
+    function generateDots() {
+        dotsContainer.innerHTML = certifications.map((_, index) => `
+            <button class="cert-dot ${index === 0 ? 'active' : ''}" data-index="${index}" aria-label="Go to certification ${index + 1}"></button>
+        `).join('');
+
+        // Add click listeners to dots
+        dotsContainer.querySelectorAll('.cert-dot').forEach(dot => {
+            dot.addEventListener('click', () => {
+                goToSlide(parseInt(dot.dataset.index));
+            });
+        });
+    }
+
+    // Update active slide
+    function updateSlide(direction) {
+        const slides = slider.querySelectorAll('.cert-slide');
+        const dots = dotsContainer.querySelectorAll('.cert-dot');
+        
+        // Remove active class and add prev class for exit animation
+        slides[currentIndex].classList.remove('active');
+        if (direction === 'next') {
+            slides[currentIndex].classList.add('prev');
+        }
+        dots[currentIndex].classList.remove('active');
+
+        // Update index
+        if (direction === 'next') {
+            currentIndex = (currentIndex + 1) % certifications.length;
+        } else {
+            currentIndex = (currentIndex - 1 + certifications.length) % certifications.length;
+        }
+
+        // Clean up prev class from all slides
+        setTimeout(() => {
+            slides.forEach(slide => slide.classList.remove('prev'));
+        }, 500);
+
+        // Add active class to new slide
+        slides[currentIndex].classList.add('active');
+        dots[currentIndex].classList.add('active');
+    }
+
+    // Go to specific slide
+    function goToSlide(index) {
+        if (index === currentIndex) return;
+        
+        const slides = slider.querySelectorAll('.cert-slide');
+        const dots = dotsContainer.querySelectorAll('.cert-dot');
+        
+        slides[currentIndex].classList.remove('active');
+        dots[currentIndex].classList.remove('active');
+        
+        currentIndex = index;
+        
+        slides[currentIndex].classList.add('active');
+        dots[currentIndex].classList.add('active');
+    }
+
+    // Event listeners
+    prevBtn.addEventListener('click', () => updateSlide('prev'));
+    nextBtn.addEventListener('click', () => updateSlide('next'));
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        const certSection = document.querySelector('.certifications-section');
+        if (!certSection) return;
+        
+        const rect = certSection.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+        
+        if (isVisible) {
+            if (e.key === 'ArrowLeft') {
+                updateSlide('prev');
+            } else if (e.key === 'ArrowRight') {
+                updateSlide('next');
+            }
+        }
+    });
+
+    // Initialize
+    generateSlides();
+    generateDots();
+    generateBadges();
+})();
