@@ -228,8 +228,8 @@
                         <p class="project-card-subtitle">Self-Healing 3-Tier Architecture</p>
                         <ul class="project-highlights">
                             <li><i class="fas fa-check-circle"></i> Deployed a 3-tier architecture in ap-southeast-1 using Terraform</li>
-                            <li><i class="fas fa-check-circle"></i> Implemented self-healing logic via EventBridge and Discord notifications</li>
-                            <li><i class="fas fa-check-circle"></i> Reduced manual recovery time to near-zero</li>
+                            <li><i class="fas fa-check-circle"></i> Implemented automated self-healing via ASG Health Checks and CloudWatch Alarms</li>
+                            <li><i class="fas fa-check-circle"></i> Achieved High Availability with zero manual intervention during instance failure</li>
 
                         </ul>
                         <div class="project-card-actions">
@@ -395,22 +395,22 @@ resource "aws_security_group" "db_sg" {
                         <div class="result-metric">
                             <span class="metric-value">90%</span>
                             <span class="metric-label">MTTR Reduction</span>
-                            <span class="metric-detail">Drastically faster recovery from instance failures.</span>
+                            <span class="metric-detail">Automated instance replacement via ASG eliminates manual rebooting.</span>
                         </div>
                         <div class="result-metric">
-                            <span class="metric-value">&lt;30s</span>
-                            <span class="metric-label">Detection Time</span>
-                            <span class="metric-detail">Issues are identified and mitigated in seconds, not 15 mins.</span>
+                            <span class="metric-value">&lt;60s</span>
+                            <span class="metric-label">Failover</span>
+                            <span class="metric-detail">RDS Multi-AZ ensures rapid database failover with zero data loss.</span>
                         </div>
                         <div class="result-metric">
                             <span class="metric-value">99.9%</span>
-                            <span class="metric-label">Uptime Achieved</span>
-                            <span class="metric-detail">Multi-AZ deployment ensures regional resilience.</span>
+                            <span class="metric-label">Uptime</span>
+                            <span class="metric-detail">Multi-AZ deployment ensures regional resilience against AZ outages.</span>
                         </div>
                         <div class="result-metric">
                             <span class="metric-value">0</span>
                             <span class="metric-label">Interventions</span>
-                            <span class="metric-detail">Fully automated self-healing via ASG and EventBridge.</span>
+                            <span class="metric-detail">Self-healing infrastructure automatically maintains desired instance count.</span>
                         </div>
                     </div>
                 </div>
@@ -418,10 +418,10 @@ resource "aws_security_group" "db_sg" {
                 <div class="deep-dive-section">
                     <h3>Technologies Used</h3>
                     <ul class="tech-list">
-                        <li><strong>Cloud:</strong> AWS (VPC, EC2, ALB, ASG, RDS MySQL, CloudWatch, EventBridge, Lambda).</li>
-                        <li><strong>IaC:</strong> Terraform (Remote State with S3/DynamoDB Locking).</li>
-                        <li><strong>DevOps:</strong> GitHub Actions for CI/CD, Discord Webhooks for real-time alerting.</li>
-                        <li><strong>Security:</strong> IAM (Least Privilege), Security Group Nesting.</li>
+                        <li><strong>Cloud:</strong> AWS (VPC, EC2, ALB, ASG, RDS MySQL, CloudWatch).</li>
+                        <li><strong>IaC:</strong> Terraform (Remote State with S3 & DynamoDB Locking).</li>
+                        <li><strong>Security:</strong> IAM (Least Privilege), Security Group Nesting, Private Subnet Isolation.</li>
+                        <li><strong>CI/CD:</strong> GitHub Actions (for automated Terraform linting/validation).</li>
                     </ul>
                 </div>
             </div>
