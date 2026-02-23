@@ -225,12 +225,11 @@
                                 <i class="fab fa-github"></i>
                             </a>
                         </div>
-                        <p class="project-card-subtitle">Self-Healing 3-Tier Architecture</p>
+                        <p class="project-card-subtitle">High-Availability 3-Tier AWS Infrastructure</p>
                         <ul class="project-highlights">
-                            <li><i class="fas fa-check-circle"></i> Deployed a 3-tier architecture in ap-southeast-1 using Terraform</li>
-                            <li><i class="fas fa-check-circle"></i> Implemented automated self-healing via ASG Health Checks and CloudWatch Alarms</li>
-                            <li><i class="fas fa-check-circle"></i> Achieved High Availability with zero manual intervention during instance failure</li>
-
+                            <li><i class="fas fa-check-circle"></i> Self-Healing - Automatically replaces unhealthy instances via ASG.</li>
+                            <li><i class="fas fa-check-circle"></i> Fault Tolerance - Multi-AZ RDS with zero data loss during AZ failures.</li>
+                            <li><i class="fas fa-check-circle"></i> High Availability - Multi-AZ deployment survives single AZ outages.</li>
                         </ul>
                         <div class="project-card-actions">
                             <button class="btn-deep-dive" data-project="resilience">View Deep-Dive</button>
@@ -332,7 +331,7 @@
             <!-- Project Resilience Deep-Dive -->
             <div id="resilience-content" class="modal-project-content">
                 <h2 class="modal-title">Project Resilience</h2>
-                <p class="modal-subtitle">Self-Healing 3-Tier Architecture on AWS</p>
+                <p class="modal-subtitle">High-Availability 3-Tier AWS Infrastructure</p>
                 
                 <div class="deep-dive-section">
                     <h3>The Problem</h3>
@@ -418,10 +417,10 @@ resource "aws_security_group" "db_sg" {
                 <div class="deep-dive-section">
                     <h3>Technologies Used</h3>
                     <ul class="tech-list">
-                        <li><strong>Cloud:</strong> AWS (VPC, EC2, ALB, ASG, RDS MySQL, CloudWatch).</li>
-                        <li><strong>IaC:</strong> Terraform (Remote State with S3 & DynamoDB Locking).</li>
-                        <li><strong>Security:</strong> IAM (Least Privilege), Security Group Nesting, Private Subnet Isolation.</li>
-                        <li><strong>CI/CD:</strong> GitHub Actions (for automated Terraform linting/validation).</li>
+                        <li><strong>Cloud Provider:</strong> AWS (Region: ap-southeast-1).</li>
+                        <li><strong>Infrastructure as Code:</strong> Terraform (~> 5.0).</li>
+                        <li><strong>Database:</strong> MySQL 8.0 (RDS Multi-AZ).</li>
+                        <li><strong>Compute:</strong> Amazon Linux 2023 + Apache HTTP Server.</li>
                     </ul>
                 </div>
             </div>
