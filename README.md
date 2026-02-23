@@ -6,13 +6,13 @@
 
 A modern, high-performance personal portfolio built using a cloud-native, serverless architecture. This project showcases Infrastructure as Code (IaC), automated CI/CD, and a secure backend pipeline.
 
-## 🌐 Live Site
+## Live Site
 
 **[ivanrempis.dev](https://ivanrempis.dev)**
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Features](#-features)
 - [Technical Architecture](#-technical-architecture)
@@ -24,7 +24,7 @@ A modern, high-performance personal portfolio built using a cloud-native, server
 
 ---
 
-## ✨ Features
+## Features
 
 - **Responsive Design** - Mobile-first approach with smooth animations
 - **Serverless Contact Form** - AWS-powered backend with real-time email notifications
@@ -35,7 +35,7 @@ A modern, high-performance personal portfolio built using a cloud-native, server
 
 ---
 
-## 🏗️ Technical Architecture
+## Technical Architecture
 
 ### 1. Infrastructure as Code (IaC)
 
@@ -63,7 +63,7 @@ A modern, high-performance personal portfolio built using a cloud-native, server
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Frontend
 
@@ -90,7 +90,7 @@ A modern, high-performance personal portfolio built using a cloud-native, server
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 Portfolio/
@@ -129,7 +129,7 @@ Portfolio/
 
 ---
 
-## 💻 Local Development
+## Local Development
 
 1. **Clone the repository**
 
