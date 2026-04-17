@@ -98,10 +98,9 @@ Portfolio/
 ├── styles.css          # Stylesheet with responsive design
 ├── script.js           # JavaScript for interactivity & form handling
 ├── README.md           # Documentation
-└── Downloads/          # Assets (images, icons, resume)
+└── Downloads/          # Assets (images, icons)
     ├── Logo.png
     ├── PFP.png
-    ├── Resume.pdf
     └── ...
 ```
 

@@ -744,46 +744,6 @@ section, div, .hero, .about, .skills, .portfolio, .contact, .footer,
     border-color: #ffffff;
 }
 
-/* Resume Download Button */
-.resume-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 1.5rem;
-    padding: 12px 24px;
-    background: transparent;
-    color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 25px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.resume-btn:hover {
-    background: #ffffff;
-    color: #0d0d0d;
-    transform: translateY(-2px);
-}
-
-.resume-btn i {
-    font-size: 0.85rem;
-}
-
-/* Footer Resume Download Icon */
-.footer .resume-download {
-    background: rgba(239, 68, 68, 0.1);
-    border-color: rgba(239, 68, 68, 0.3);
-    color: #ef4444;
-}
-
-.footer .resume-download:hover {
-    background: #ef4444;
-    color: #ffffff;
-    border-color: #ef4444;
-}
-
 /* Project Status Indicator (in AWS project cards) */
 .project-status {
     display: flex;
@@ -1807,11 +1767,6 @@ section, div, .hero, .about, .skills, .portfolio, .contact, .footer,
         flex-direction: column-reverse;
         gap: 1rem;
         text-align: center;
-    }
-
-    .resume-btn {
-        width: 100%;
-        justify-content: center;
     }
 
     /* AWS Projects Responsive */
