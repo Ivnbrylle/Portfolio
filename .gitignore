@@ -2,7 +2,7 @@
 node_modules/
 
 # Downloads folder
-Downloads/
+Downloads/*
 !Downloads/project-global-flow-diagram.jpg
 
 # OS files
