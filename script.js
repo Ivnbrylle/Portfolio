@@ -191,6 +191,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalClose = document.querySelector('.modal-close');
     const resilienceContent = document.getElementById('resilience-content');
     const janitorContent = document.getElementById('janitor-content');
+    const globalFlowContent = document.getElementById('global-flow-content');
 
     // Open modal with corresponding project content
     deepDiveButtons.forEach(button => {
@@ -200,12 +201,15 @@ document.addEventListener('DOMContentLoaded', function() {
             // Hide all project contents
             if (resilienceContent) resilienceContent.style.display = 'none';
             if (janitorContent) janitorContent.style.display = 'none';
+            if (globalFlowContent) globalFlowContent.style.display = 'none';
             
             // Show selected project content
             if (project === 'resilience' && resilienceContent) {
                 resilienceContent.style.display = 'block';
             } else if (project === 'janitor' && janitorContent) {
                 janitorContent.style.display = 'block';
+            } else if (project === 'global-flow' && globalFlowContent) {
+                globalFlowContent.style.display = 'block';
             }
             
             // Show modal
