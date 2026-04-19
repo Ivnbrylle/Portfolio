@@ -192,6 +192,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const resilienceContent = document.getElementById('resilience-content');
     const janitorContent = document.getElementById('janitor-content');
     const globalFlowContent = document.getElementById('global-flow-content');
+    const arcaContent = document.getElementById('arca-content');
 
     // Open modal with corresponding project content
     deepDiveButtons.forEach(button => {
@@ -202,6 +203,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (resilienceContent) resilienceContent.style.display = 'none';
             if (janitorContent) janitorContent.style.display = 'none';
             if (globalFlowContent) globalFlowContent.style.display = 'none';
+            if (arcaContent) arcaContent.style.display = 'none';
             
             // Show selected project content
             if (project === 'resilience' && resilienceContent) {
@@ -210,6 +212,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 janitorContent.style.display = 'block';
             } else if (project === 'global-flow' && globalFlowContent) {
                 globalFlowContent.style.display = 'block';
+            } else if (project === 'arca' && arcaContent) {
+                arcaContent.style.display = 'block';
             }
             
             // Show modal

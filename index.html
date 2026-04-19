@@ -314,6 +314,36 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Project A.R.C.A. Card -->
+                <div class="aws-project-card">
+                    <div class="project-card-image">
+                        <img src="Downloads/arca_architecture.png" alt="Project A.R.C.A. Architecture Diagram" class="architecture-diagram">
+                        <div class="diagram-overlay">
+                            <span>Click to expand</span>
+                        </div>
+                    </div>
+                    <div class="project-card-content">
+                        <div class="project-card-header">
+                            <h3 class="project-card-title">Project A.R.C.A.</h3>
+                        </div>
+                        <p class="project-card-subtitle">AI Root-Cause Analysis for EC2-hosted Nginx</p>
+                        <ul class="project-highlights">
+                            <li><i class="fas fa-check-circle"></i> Log Intelligence - Streams Nginx error logs from CloudWatch into Lambda automatically.</li>
+                            <li><i class="fas fa-check-circle"></i> Bedrock Analysis - Uses Amazon Bedrock to infer the likely root cause and fix.</li>
+                            <li><i class="fas fa-check-circle"></i> Incident Automation - Sends structured remediation summaries to Discord in real time.</li>
+                        </ul>
+                        <div class="project-card-actions">
+                            <button class="btn-deep-dive" data-project="arca">View Deep-Dive</button>
+                        </div>
+                        <div class="project-status">
+                            <span class="status-dot"></span>
+                            <span class="status-text">Infrastructure: <strong>Healthy</strong></span>
+                            <span class="status-separator">|</span>
+                            <span class="status-region">Region: us-east-1</span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Certifications Section -->
@@ -708,6 +738,71 @@ resource "aws_dynamodb_table" "global_api_table" {
                         <li><strong>Compute & API:</strong> AWS Lambda, API Gateway HTTP API.</li>
                         <li><strong>Data Layer:</strong> Amazon DynamoDB Global Tables.</li>
                         <li><strong>Automation & IaC:</strong> Terraform, Python 3.12, IAM.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Project A.R.C.A. Deep-Dive -->
+            <div id="arca-content" class="modal-project-content" style="display: none;">
+                <h2 class="modal-title">Project A.R.C.A.</h2>
+                <p class="modal-subtitle">AI Root-Cause Analysis for EC2-hosted Nginx</p>
+
+                <div class="deep-dive-section">
+                    <h3>The Problem</h3>
+                    <p class="problem-text">
+                        Standard monitoring can tell you that an application is broken, but not why it broke. That forces engineers to manually inspect logs,
+                        test hypotheses, and stitch together a fix while downtime continues.
+                    </p>
+                </div>
+
+                <div class="deep-dive-section">
+                    <h3>The Solution</h3>
+                    <p>
+                        I built an event-driven analysis pipeline that automates the first response loop:
+                    </p>
+                    <ul class="solution-list">
+                        <li>CloudWatch logs stream Nginx errors from the EC2 instance.</li>
+                        <li>A Lambda function decodes the log payload and forwards it to Amazon Bedrock.</li>
+                        <li>Bedrock returns a likely root cause and remediation command for the incident.</li>
+                        <li>The result is posted to Discord so the response is visible immediately.</li>
+                    </ul>
+                </div>
+
+                <div class="deep-dive-section">
+                    <h3>Architecture Diagram</h3>
+                    <div class="modal-diagram-container">
+                        <img src="Downloads/arca_architecture.png" alt="Project A.R.C.A. Full Architecture" class="modal-diagram">
+                    </div>
+                </div>
+
+                <div class="deep-dive-section">
+                    <h3>The Results</h3>
+                    <div class="results-grid">
+                        <div class="result-metric">
+                            <span class="metric-value">4</span>
+                            <span class="metric-label">Incident Families</span>
+                            <span class="metric-detail">Covers crashes, security events, connectivity issues, and maintenance failures.</span>
+                        </div>
+                        <div class="result-metric">
+                            <span class="metric-value">AI</span>
+                            <span class="metric-label">Root-Cause Triage</span>
+                            <span class="metric-detail">Uses Amazon Bedrock to convert raw log signals into a likely fix path.</span>
+                        </div>
+                        <div class="result-metric">
+                            <span class="metric-value">1</span>
+                            <span class="metric-label">Unified Response Flow</span>
+                            <span class="metric-detail">Connects logs, Lambda, Bedrock, and Discord into a single remediation loop.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="deep-dive-section">
+                    <h3>Technologies Used</h3>
+                    <ul class="tech-list">
+                        <li><strong>Cloud Provider:</strong> AWS (Region: us-east-1).</li>
+                        <li><strong>Compute:</strong> Amazon EC2, AWS Lambda, Amazon Bedrock.</li>
+                        <li><strong>Observability:</strong> CloudWatch Logs and subscription filters.</li>
+                        <li><strong>Automation:</strong> Terraform, Python 3.12, Discord webhooks.</li>
                     </ul>
                 </div>
             </div>
