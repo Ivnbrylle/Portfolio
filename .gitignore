@@ -4,6 +4,7 @@ node_modules/
 # Downloads folder
 Downloads/*
 !Downloads/project-global-flow-diagram.jpg
+!Downloads/arca_architecture.png
 
 # OS files
 .DS_Store
