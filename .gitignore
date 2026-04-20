@@ -1,10 +1,8 @@
 # Dependencies
 node_modules/
 
-# Downloads folder
-Downloads/*
-!Downloads/project-global-flow-diagram.jpg
-!Downloads/arca_architecture.png
+# Static assets for portfolio must be tracked for deployment
+# (icons, profile images, project diagrams, certificates, etc.)
 
 # OS files
 .DS_Store
