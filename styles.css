@@ -241,6 +241,13 @@ section, div, .hero, .about, .skills, .portfolio, .contact, .footer,
     transition: all 0.28s ease;
 }
 
+.palette-icon {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+    display: block;
+}
+
 .theme-toggle:hover {
     transform: translateY(-2px) rotate(8deg);
     box-shadow: 0 8px 20px rgba(var(--accent-rgb), 0.25);

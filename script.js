@@ -8,7 +8,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Accent palette cycling: creates a more interactive and personal visual identity.
     const themes = ['theme-ember', 'theme-glacier', 'theme-mint'];
-    const savedTheme = localStorage.getItem('portfolio-theme');
+    let savedTheme = null;
+    try {
+        savedTheme = localStorage.getItem('portfolio-theme');
+    } catch (error) {
+        savedTheme = null;
+    }
+
     if (savedTheme && themes.includes(savedTheme)) {
         document.documentElement.setAttribute('data-theme', savedTheme);
     }
@@ -27,7 +33,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const nextTheme = themes[nextIndex];
 
             document.documentElement.setAttribute('data-theme', nextTheme);
-            localStorage.setItem('portfolio-theme', nextTheme);
+            try {
+                localStorage.setItem('portfolio-theme', nextTheme);
+            } catch (error) {
+                // Ignore storage restrictions on locked-down browsers/environments.
+            }
         });
     }
 
