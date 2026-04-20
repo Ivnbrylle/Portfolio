@@ -3,17 +3,41 @@ document.addEventListener('DOMContentLoaded', function() {
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
+    const progressBar = document.querySelector('.scroll-progress');
+    const themeToggle = document.getElementById('theme-toggle');
 
-    hamburger.addEventListener('click', function() {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
-    });
+    // Accent palette cycling: creates a more interactive and personal visual identity.
+    const themes = ['theme-ember', 'theme-glacier', 'theme-mint'];
+    const savedTheme = localStorage.getItem('portfolio-theme');
+    if (savedTheme && themes.includes(savedTheme)) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    }
+
+    if (hamburger && navMenu) {
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+    }
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', function() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const nextIndex = currentTheme ? (themes.indexOf(currentTheme) + 1) % themes.length : 0;
+            const nextTheme = themes[nextIndex];
+
+            document.documentElement.setAttribute('data-theme', nextTheme);
+            localStorage.setItem('portfolio-theme', nextTheme);
+        });
+    }
 
     // Close mobile menu when clicking on a link
     navLinks.forEach(link => {
         link.addEventListener('click', function() {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
+            if (hamburger && navMenu) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
         });
     });
 
@@ -54,15 +78,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 link.classList.add('active');
             }
         });
+
+        if (progressBar) {
+            const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = scrollableHeight > 0 ? (window.scrollY / scrollableHeight) * 100 : 0;
+            progressBar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
+        }
     }
 
     window.addEventListener('scroll', updateActiveNav);
+    updateActiveNav();
 
     // Form submission
     const contactForm = document.getElementById('contact-form');
     const responseMsg = document.getElementById('response-msg');
 
-    contactForm.addEventListener('submit', async function(e) {
+    if (contactForm && responseMsg) {
+        contactForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         
         // Gather the data from the inputs
@@ -75,8 +107,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Change button state to show it's working
         const btn = document.getElementById('submit-btn');
-        btn.innerText = "SENDING...";
-        btn.disabled = true;
+        if (btn) {
+            btn.innerText = "SENDING...";
+            btn.disabled = true;
+        }
 
         try {
             // Send the data to AWS API Gateway
@@ -101,10 +135,13 @@ document.addEventListener('DOMContentLoaded', function() {
             responseMsg.innerHTML = "Oops! Something went wrong. Please try again.";
             responseMsg.style.color = '#f44336';
         } finally {
-            btn.innerText = "SUBMIT";
-            btn.disabled = false;
+            if (btn) {
+                btn.innerText = "SUBMIT";
+                btn.disabled = false;
+            }
         }
     });
+    }
 
     // Intersection Observer for animations
     const observerOptions = {
@@ -126,12 +163,34 @@ document.addEventListener('DOMContentLoaded', function() {
     }, observerOptions);
 
     // Observe elements for animation
-    const animateElements = document.querySelectorAll('.skill-item, .portfolio-item, .service-item');
+    const animateElements = document.querySelectorAll('.skill-item, .service-item, .aws-project-card, .portfolio-image-container, .result-metric');
     animateElements.forEach(el => {
         el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
+        el.style.transform = 'translateY(24px)';
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(el);
+    });
+
+    // Card tilt for richer interaction depth.
+    const tiltCards = document.querySelectorAll('.aws-project-card, .service-item, .portfolio-image-container');
+    tiltCards.forEach(card => {
+        card.addEventListener('mousemove', function(e) {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = ((y - centerY) / centerY) * -4;
+            const rotateY = ((x - centerX) / centerX) * 4;
+
+            card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+        });
+
+        card.addEventListener('mouseleave', function() {
+            card.style.transform = '';
+        });
     });
 
     // Typing animation for hero text
@@ -151,10 +210,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Start typing animation when page loads
     const heroName = document.querySelector('.hero-name');
-    const originalText = heroName.textContent;
-    setTimeout(() => {
-        typeWriter(heroName, originalText, 150);
-    }, 1000);
+    if (heroName) {
+        const originalText = heroName.textContent;
+        setTimeout(() => {
+            typeWriter(heroName, originalText, 140);
+        }, 800);
+    }
 
     // Parallax effect for hero section - DISABLED to fix movement issue
     // window.addEventListener('scroll', function() {
