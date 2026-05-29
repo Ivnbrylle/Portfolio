@@ -67,9 +67,13 @@ A modern, high-performance personal portfolio built using a cloud-native, server
 
 ### Frontend
 
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
+![Motion](https://img.shields.io/badge/Motion-0055FF?style=flat-square&logo=framer&logoColor=white)
+
+Single-page app built with **React 19 + TypeScript**, bundled by **Vite**, styled with **Tailwind CSS v4** (single amber palette with a persisted light/dark theme toggle), and animated with **Motion**. The production build outputs static assets to `dist/`, deployed to S3 + CloudFront.
 
 ### Cloud & DevOps
 
@@ -94,14 +98,20 @@ A modern, high-performance personal portfolio built using a cloud-native, server
 
 ```
 Portfolio/
-├── index.html          # Main HTML file
-├── styles.css          # Stylesheet with responsive design
-├── script.js           # JavaScript for interactivity & form handling
-├── README.md           # Documentation
-└── Downloads/          # Assets (images, icons)
-    ├── Logo.png
-    ├── PFP.png
-    └── ...
+├── index.html              # Vite entry (mount point, fonts, no-flash theme script)
+├── package.json            # Dependencies & scripts (dev / build / preview)
+├── vite.config.ts          # Vite + React + Tailwind plugins
+├── tsconfig*.json          # TypeScript configuration
+├── public/
+│   └── Downloads/          # Static assets (images, icons, certs, resume)
+├── src/
+│   ├── main.tsx            # App bootstrap + ThemeProvider
+│   ├── App.tsx             # Section composition
+│   ├── index.css           # Tailwind v4 import + theme tokens + globals
+│   ├── lib/theme.tsx       # Light/dark theme context
+│   ├── data/               # Typed content (skills, projects, certs)
+│   └── components/         # Navbar, Hero, AwsProjects, ProjectModal, ...
+└── .github/workflows/      # CI/CD: build → S3 sync → CloudFront invalidation
 ```
 
 ---
@@ -130,6 +140,8 @@ Portfolio/
 
 ## Local Development
 
+**Prerequisites:** Node.js 22+ and npm.
+
 1. **Clone the repository**
 
    ```bash
@@ -137,22 +149,28 @@ Portfolio/
    cd Portfolio
    ```
 
-2. **Open locally**
-   - Simply open `index.html` in your browser, or
-   - Use a local server:
+2. **Install dependencies**
 
-     ```bash
-     # Using Python
-     python -m http.server 8000
+   ```bash
+   npm install
+   ```
 
-     # Using Node.js
-     npx serve
-     ```
+3. **Start the dev server**
 
-3. **View the site**
-   - Navigate to `http://localhost:8000`
+   ```bash
+   npm run dev
+   ```
 
-> **Note:** The contact form requires the AWS backend to be deployed. For local testing, form submissions will not work.
+   Then navigate to `http://localhost:5173`.
+
+4. **Build for production**
+
+   ```bash
+   npm run build     # outputs static assets to dist/
+   npm run preview   # serve the production build locally
+   ```
+
+> **Note:** The contact form posts to the live AWS backend (API Gateway). Submissions work from any environment with network access to the endpoint.
 
 ---
 

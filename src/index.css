@@ -1,0 +1,159 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---- Design tokens (consumed by Tailwind utilities, resolve at runtime) ---- */
+@theme {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-card: var(--card);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+
+  --font-sans: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Light theme (default) */
+:root {
+  --accent: #ff9f43;
+  --accent-strong: #ff7a1a;
+  --accent-rgb: 255, 159, 67;
+
+  --bg: #f5f6f8;
+  --surface: #ffffff;
+  --card: rgba(255, 255, 255, 0.88);
+  --text: #16202e;
+  --muted: #5a6b80;
+  --border: rgba(15, 23, 42, 0.1);
+
+  --glow-a: rgba(255, 159, 67, 0.16);
+  --glow-b: rgba(63, 137, 255, 0.1);
+}
+
+/* Dark theme */
+.dark {
+  --bg: #0f141c;
+  --surface: #151d28;
+  --card: rgba(24, 33, 46, 0.86);
+  --text: #e8edf3;
+  --muted: #9aa9bd;
+  --border: rgba(255, 255, 255, 0.09);
+
+  --glow-a: rgba(255, 159, 67, 0.28);
+  --glow-b: rgba(63, 137, 255, 0.2);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  color: var(--muted);
+  background:
+    radial-gradient(1200px 600px at 80% -5%, var(--glow-a), transparent 55%),
+    radial-gradient(900px 480px at 12% 20%, var(--glow-b), transparent 58%),
+    var(--bg);
+  background-attachment: fixed;
+  min-height: 100vh;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+/* ---- Hero diagonal accent panel ---- */
+.hero-diagonal {
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.03), rgba(var(--accent-rgb), 0.09));
+  clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+@media (max-width: 1024px) {
+  .hero-diagonal {
+    clip-path: polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+}
+@media (max-width: 768px) {
+  .hero-diagonal {
+    display: none;
+  }
+}
+
+/* ---- Skills marquee ---- */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ---- Status dot pulse ---- */
+.status-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.1); }
+}
+
+/* ---- Cert glow ---- */
+@keyframes glowPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.1); }
+}
+.cert-glow {
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+/* ---- Code block ---- */
+.code-block code {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  display: block;
+  white-space: pre;
+}
+
+/* ---- Custom scrollbar ---- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(var(--accent-rgb), 0.45);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(var(--accent-rgb), 0.7);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

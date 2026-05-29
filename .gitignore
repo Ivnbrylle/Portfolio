@@ -1,8 +1,11 @@
 # Dependencies
 node_modules/
 
-# Static assets for portfolio must be tracked for deployment
-# (icons, profile images, project diagrams, certificates, etc.)
+# Build output (generated in CI, not committed)
+dist/
+
+# Vite / TS
+*.tsbuildinfo
 
 # OS files
 .DS_Store
