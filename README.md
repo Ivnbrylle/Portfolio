@@ -178,10 +178,10 @@ Portfolio/
 
 **Ivan Rempis**
 
-- 🎓 4th Year Computer Science Student | University of the East - Manila
-- ☁️ Aspiring Cloud Engineer
-- 🔗 [LinkedIn](https://www.linkedin.com/in/ivn-brylle/)
-- 💻 [GitHub](https://github.com/Ivnbrylle)
+- BS Computer Science | University of the East - Manila
+- Aspiring Cloud Engineer
+- [LinkedIn](https://www.linkedin.com/in/ivn-brylle/)
+- [GitHub](https://github.com/Ivnbrylle)
 
 ---
 
