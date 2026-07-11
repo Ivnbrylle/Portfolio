@@ -53,7 +53,7 @@ export function ProjectModal({ project, onClose, onOpenLightbox }: Props) {
               type="button"
               aria-label="Close"
               onClick={onClose}
-              className="absolute right-6 top-6 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-xl text-text transition-transform duration-300 hover:rotate-90 hover:bg-white/20"
+              className="absolute right-6 top-6 flex h-10 w-10 items-center justify-center rounded-full bg-muted/10 text-xl text-text transition-transform duration-300 hover:rotate-90 hover:bg-muted/20"
             >
               <FaXmark />
             </button>
@@ -113,7 +113,7 @@ export function ProjectModal({ project, onClose, onOpenLightbox }: Props) {
                 {project.deepDive.results.map((r) => (
                   <div
                     key={r.label}
-                    className="rounded-xl border border-border bg-white/[0.04] p-5 text-center transition-all duration-300 hover:-translate-y-1 hover:border-accent/40"
+                    className="rounded-xl border border-border bg-muted/5 p-5 text-center transition-all duration-300 hover:-translate-y-1 hover:border-accent/40"
                   >
                     <span className="block text-3xl font-bold text-accent">{r.value}</span>
                     <span className="mt-1 block text-sm font-semibold text-text">{r.label}</span>
@@ -124,7 +124,7 @@ export function ProjectModal({ project, onClose, onOpenLightbox }: Props) {
             </Section>
 
             <Section title="Technologies Used">
-              <ul className="list-disc space-y-2 rounded-lg bg-white/[0.04] py-5 pl-10 pr-6">
+              <ul className="list-disc space-y-2 rounded-lg bg-muted/5 py-5 pl-10 pr-6">
                 {project.deepDive.tech.map((t) => (
                   <li key={t.label} className="text-[0.95rem] leading-relaxed text-muted">
                     <strong className="text-text">{t.label}:</strong> {t.value}

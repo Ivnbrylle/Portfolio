@@ -12,7 +12,7 @@ export function Skills() {
           {skills.map((skill, i) => (
             <Reveal key={skill.label} delay={i * 0.04}>
               <div className="flex flex-col items-center gap-3">
-                <div className="flex h-[70px] w-[70px] items-center justify-center rounded-xl border border-accent/35 bg-gradient-to-br from-accent/20 to-white/10 transition-transform duration-300 hover:-translate-y-1.5">
+                <div className="flex h-[70px] w-[70px] items-center justify-center rounded-xl border border-accent/35 bg-gradient-to-br from-accent/20 to-card transition-transform duration-300 hover:-translate-y-1.5">
                   <img src={skill.icon} alt={skill.label} className="h-10 w-10 object-contain" />
                 </div>
                 <span className="text-sm font-medium text-muted">{skill.label}</span>

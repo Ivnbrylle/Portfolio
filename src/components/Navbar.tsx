@@ -33,7 +33,7 @@ export function Navbar() {
   }, []);
 
   return (
-    <nav className="fixed top-0 z-[1000] w-full border-b border-white/[0.06] bg-bg/80 py-4 backdrop-blur-xl">
+    <nav className="fixed top-0 z-[1000] w-full border-b border-border bg-bg/80 py-4 backdrop-blur-xl">
       <div className="mx-auto flex max-w-[1200px] items-center justify-between px-5">
         <a href="#home" className="inline-block transition-transform duration-300 hover:scale-105">
           <img src="/Downloads/Logo.png" alt="Ivan Rempis logo" className="block h-10 w-auto" />
@@ -88,7 +88,7 @@ export function Navbar() {
 
       {/* Mobile menu */}
       <div
-        className={`overflow-hidden border-t border-white/[0.06] bg-surface transition-[max-height] duration-300 md:hidden ${
+        className={`overflow-hidden border-t border-border bg-surface transition-[max-height] duration-300 md:hidden ${
           open ? 'max-h-96' : 'max-h-0'
         }`}
       >

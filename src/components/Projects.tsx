@@ -9,7 +9,7 @@ export function Projects() {
 
         <div className="mx-auto grid max-w-[1100px] items-center gap-10 md:grid-cols-2 md:gap-16">
           <Reveal className="flex justify-center">
-            <div className="max-w-[400px] overflow-hidden rounded-2xl border border-border transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/50 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)]">
+            <div className="max-w-[400px] overflow-hidden rounded-2xl border border-border transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/50 shadow-card hover:shadow-card-hover">
               <img src="/Downloads/aqprime.png" alt="AQ Prime" className="block w-full" />
             </div>
           </Reveal>

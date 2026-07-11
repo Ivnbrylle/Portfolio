@@ -28,7 +28,7 @@ export function About() {
         <Reveal>
           <div className="mx-auto max-w-[600px] text-center">
             <p className="text-lg text-muted">
-              <strong className="text-text">Aspiring Cloud Engineer | 4th Year Computer Science Student</strong>
+              <strong className="text-text">Aspiring Cloud Engineer | BSCS Graduate</strong>
               <br />I specialize in architecting resilient, high-availability infrastructure on AWS using Terraform.
             </p>
           </div>
@@ -41,7 +41,7 @@ export function About() {
               delay={i * 0.08}
               className={i === 2 ? 'sm:col-span-2 sm:mx-auto sm:max-w-[450px]' : ''}
             >
-              <div className="group h-full rounded-2xl border border-border bg-card p-8 text-center transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/45 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)]">
+              <div className="group h-full rounded-2xl border border-border bg-card p-8 text-center transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/45 shadow-card hover:shadow-card-hover">
                 <h3 className="mb-4 text-xl font-semibold text-text">{s.title}</h3>
                 <p className="mb-4 text-sm italic text-muted/70">{s.tagline}</p>
                 <p className="text-[0.95rem] text-muted">{s.body}</p>

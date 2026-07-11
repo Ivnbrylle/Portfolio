@@ -66,7 +66,7 @@ export function Certifications() {
               transition={{ duration: 0.4, ease: 'easeOut' }}
               className="absolute inset-0 flex flex-col items-center pt-4"
             >
-              <div className="group relative mb-4 aspect-[16/11] w-full max-w-[480px] overflow-hidden rounded-xl border border-border bg-gradient-to-br from-surface to-card transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/40 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)]">
+              <div className="group relative mb-4 aspect-[16/11] w-full max-w-[480px] overflow-hidden rounded-xl border border-border bg-gradient-to-br from-surface to-card transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/40 shadow-card hover:shadow-card-hover">
                 <img
                   src={cert.certificate}
                   alt={cert.name}
@@ -92,7 +92,7 @@ export function Certifications() {
             aria-label={`Go to certification ${i + 1}`}
             onClick={() => go(i)}
             className={`h-2 rounded-full transition-all duration-300 ${
-              i === index ? 'w-5 bg-gradient-to-r from-accent to-accent-strong' : 'w-2 bg-white/20 hover:bg-white/40'
+              i === index ? 'w-5 bg-gradient-to-r from-accent to-accent-strong' : 'w-2 bg-muted/30 hover:bg-muted/60'
             }`}
           />
         ))}
@@ -126,7 +126,7 @@ function CarouselButton({
       type="button"
       aria-label={label}
       onClick={onClick}
-      className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-border bg-white/5 text-muted transition-all duration-300 hover:scale-105 hover:border-accent/40 hover:text-text active:scale-95"
+      className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-border bg-muted/5 text-muted transition-all duration-300 hover:scale-105 hover:border-accent/40 hover:text-text hover:bg-muted/10 active:scale-95"
     >
       {children}
     </button>

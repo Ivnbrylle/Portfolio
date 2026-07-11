@@ -13,29 +13,39 @@
   --color-accent: var(--accent);
   --color-accent-strong: var(--accent-strong);
 
+  --shadow-card: var(--shadow-card);
+  --shadow-card-hover: var(--shadow-card-hover);
+
   --font-sans: 'Manrope', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
 }
 
 /* Light theme (default) */
 :root {
-  --accent: #ff9f43;
-  --accent-strong: #ff7a1a;
-  --accent-rgb: 255, 159, 67;
+  --accent: #e05e00;
+  --accent-strong: #b84600;
+  --accent-rgb: 224, 94, 0;
 
-  --bg: #f5f6f8;
+  --bg: #f1f5f9;
   --surface: #ffffff;
-  --card: rgba(255, 255, 255, 0.88);
-  --text: #16202e;
-  --muted: #5a6b80;
-  --border: rgba(15, 23, 42, 0.1);
+  --card: #ffffff;
+  --text: #0f172a;
+  --muted: #475569;
+  --border: rgba(15, 23, 42, 0.08);
 
-  --glow-a: rgba(255, 159, 67, 0.16);
-  --glow-b: rgba(63, 137, 255, 0.1);
+  --glow-a: rgba(224, 94, 0, 0.06);
+  --glow-b: rgba(59, 130, 246, 0.05);
+
+  --shadow-card: 0 10px 30px -10px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.02);
+  --shadow-card-hover: 0 20px 40px -15px rgba(15, 23, 42, 0.12), 0 4px 6px -2px rgba(15, 23, 42, 0.04);
 }
 
 /* Dark theme */
 .dark {
+  --accent: #ff9f43;
+  --accent-strong: #ff7a1a;
+  --accent-rgb: 255, 159, 67;
+
   --bg: #0f141c;
   --surface: #151d28;
   --card: rgba(24, 33, 46, 0.86);
@@ -45,6 +55,9 @@
 
   --glow-a: rgba(255, 159, 67, 0.28);
   --glow-b: rgba(63, 137, 255, 0.2);
+
+  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+  --shadow-card-hover: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 
 html {

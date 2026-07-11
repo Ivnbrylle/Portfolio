@@ -9,7 +9,7 @@ interface Props {
 
 export function AwsProjectCard({ project, onDeepDive, onOpenLightbox }: Props) {
   return (
-    <div className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-2 hover:border-accent/50 hover:shadow-[0_25px_50px_rgba(0,0,0,0.4)]">
+    <div className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-2 hover:border-accent/50 shadow-card hover:shadow-card-hover">
       <button
         type="button"
         onClick={() => onOpenLightbox(project.cardImage, `${project.title} architecture diagram`)}
