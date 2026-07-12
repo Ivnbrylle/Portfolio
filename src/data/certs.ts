@@ -19,4 +19,5 @@ export const certifications: Certification[] = [
 export const badges: Badge[] = [
   { image: '/Downloads/networkbadge.png', name: 'Network Basics' },
   { image: '/Downloads/introcyberbadge.png', name: 'Introduction to Cybersecurity' },
+  { image: '/Downloads/cloudbadge.png', name: 'Cloud Computing' },
 ];
