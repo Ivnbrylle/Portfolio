@@ -46,7 +46,9 @@ export function ProjectModal({ project, onClose, onOpenLightbox }: Props) {
             exit={{ opacity: 0, y: 40, scale: 0.98 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
             onClick={(e) => e.stopPropagation()}
-            className="relative mx-auto max-w-[900px] rounded-3xl border border-border bg-surface p-6 sm:p-10"
+            className={`relative mx-auto max-w-[900px] rounded-3xl border border-border bg-surface p-6 sm:p-10 ${
+              project.provider === 'gcp' ? 'gcp-theme' : project.provider === 'azure' ? 'azure-theme' : ''
+            }`}
           >
             <button
               ref={closeRef}
@@ -61,10 +63,37 @@ export function ProjectModal({ project, onClose, onOpenLightbox }: Props) {
             <h2 className="mb-2 text-3xl font-bold tracking-tight text-text sm:text-4xl">{project.title}</h2>
             <p className="mb-8 border-b border-border pb-6 text-lg text-muted/80">{project.subtitle}</p>
 
-            <Section title="The Problem">
-              <p className="rounded-r-lg border-l-[3px] border-[#ef4444] bg-[#ef4444]/10 p-5 text-[1.05rem] leading-relaxed text-muted">
+            <Section title="Overview">
+              <p className="rounded-r-lg border-l-[3px] border-accent bg-accent/5 p-5 text-[1.05rem] leading-relaxed text-muted">
                 {project.deepDive.problem}
               </p>
+            </Section>
+
+            <Section title="Key Features">
+              <ul className="grid gap-3 sm:grid-cols-2">
+                {project.highlights.map((h) => {
+                  const parts = h.split(' - ');
+                  const title = parts[0];
+                  const desc = parts[1];
+                  return (
+                    <li
+                      key={h}
+                      className="flex items-start gap-3 rounded-xl border border-border/40 bg-muted/5 p-4 text-[0.95rem] leading-relaxed text-muted"
+                    >
+                      <span className="shrink-0 text-accent">✅</span>
+                      <span>
+                        {desc ? (
+                          <>
+                            <strong className="text-text">{title}</strong> — {desc}
+                          </>
+                        ) : (
+                          h
+                        )}
+                      </span>
+                    </li>
+                  );
+                })}
+              </ul>
             </Section>
 
             <Section title="The Solution">

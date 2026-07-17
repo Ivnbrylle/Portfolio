@@ -5,8 +5,9 @@ import { ThemeToggle } from './ThemeToggle';
 const links = [
   { href: '#home', label: 'About me', id: 'home' },
   { href: '#skills', label: 'Skills', id: 'skills' },
-  { href: '#portfolio', label: 'Projects', id: 'portfolio' },
-  { href: '#aws-projects', label: 'AWS Projects', id: 'aws-projects' },
+  { href: '#aws-projects', label: 'AWS', id: 'aws-projects' },
+  { href: '#gcp-projects', label: 'GCP', id: 'gcp-projects' },
+  { href: '#azure-projects', label: 'Azure', id: 'azure-projects' },
 ];
 
 export function Navbar() {

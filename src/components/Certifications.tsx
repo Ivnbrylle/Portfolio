@@ -44,11 +44,12 @@ export function Certifications() {
   const cert = certifications[index];
 
   return (
-    <div ref={sectionRef} className="mt-16 border-t border-border pt-12">
-      <h3 className="mb-2 text-center text-3xl font-semibold text-text">Certifications</h3>
-      <p className="mx-auto mb-8 max-w-[600px] text-center text-muted/80">
-        Professional certifications validating my cloud expertise and technical skills.
-      </p>
+    <section id="certifications" ref={sectionRef} className="scroll-mt-20 py-20 border-t border-border/25 bg-surface/10">
+      <div className="mx-auto max-w-[1200px] px-5">
+        <h3 className="mb-2 text-center text-3xl font-semibold text-text">Certifications</h3>
+        <p className="mx-auto mb-8 max-w-[600px] text-center text-muted/80">
+          Professional certifications validating my cloud expertise and technical skills.
+        </p>
 
       <div className="mx-auto flex max-w-[700px] items-center justify-center gap-4 sm:gap-6">
         <CarouselButton label="Previous certification" onClick={prev}>
@@ -98,17 +99,18 @@ export function Certifications() {
         ))}
       </div>
 
-      <div className="mt-10 border-t border-border pt-8">
-        <h4 className="mb-6 text-center text-xl font-semibold text-text">Badges</h4>
-        <div className="mx-auto flex max-w-[600px] flex-wrap justify-center gap-4">
-          {badges.map((badge) => (
-            <div key={badge.name} className="h-20 w-20 overflow-hidden rounded-xl" title={badge.name}>
-              <img src={badge.image} alt={badge.name} className="h-full w-full object-contain" />
-            </div>
-          ))}
+        <div className="mt-10 border-t border-border pt-8">
+          <h4 className="mb-6 text-center text-xl font-semibold text-text">Badges</h4>
+          <div className="mx-auto flex max-w-[600px] flex-wrap justify-center gap-4">
+            {badges.map((badge) => (
+              <div key={badge.name} className="h-20 w-20 overflow-hidden rounded-xl" title={badge.name}>
+                <img src={badge.image} alt={badge.name} className="h-full w-full object-contain" />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

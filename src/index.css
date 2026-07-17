@@ -60,6 +60,33 @@
   --shadow-card-hover: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 
+/* ---- Brand-specific accent themes ---- */
+.gcp-theme {
+  --accent: #1a73e8;
+  --accent-strong: #1557b0;
+  --accent-rgb: 26, 115, 232;
+  --glow-a: rgba(26, 115, 232, 0.15);
+}
+.dark .gcp-theme {
+  --accent: #8ab4f8;
+  --accent-strong: #669df6;
+  --accent-rgb: 138, 180, 248;
+  --glow-a: rgba(138, 180, 248, 0.3);
+}
+
+.azure-theme {
+  --accent: #0078d4;
+  --accent-strong: #005a9e;
+  --accent-rgb: 0, 120, 212;
+  --glow-a: rgba(0, 120, 212, 0.15);
+}
+.dark .azure-theme {
+  --accent: #2899f5;
+  --accent-strong: #0078d4;
+  --accent-rgb: 40, 153, 245;
+  --glow-a: rgba(40, 153, 245, 0.3);
+}
+
 html {
   scroll-behavior: smooth;
 }

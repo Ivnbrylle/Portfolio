@@ -1,4 +1,4 @@
-import { FaGithub, FaLinkedinIn, FaCircleCheck } from 'react-icons/fa6';
+import { FaGithub, FaLinkedinIn } from 'react-icons/fa6';
 import type { Project } from '../data/projects';
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 
 export function AwsProjectCard({ project, onDeepDive, onOpenLightbox }: Props) {
   return (
-    <div className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-2 hover:border-accent/50 shadow-card hover:shadow-card-hover">
+    <div className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-2 hover:border-accent/50 shadow-card hover:shadow-card-hover">
       <button
         type="button"
         onClick={() => onOpenLightbox(project.cardImage, `${project.title} architecture diagram`)}
@@ -26,50 +26,57 @@ export function AwsProjectCard({ project, onDeepDive, onOpenLightbox }: Props) {
       </button>
 
       <div className="flex flex-1 flex-col p-6">
-        <div className="mb-1 flex items-center justify-between">
-          <h3 className="text-2xl font-bold tracking-tight text-text">{project.title}</h3>
-          <a
-            href={project.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            title="View on GitHub"
-            aria-label={`${project.title} on GitHub`}
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-border text-muted transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/50 hover:text-text"
-          >
-            <FaGithub />
-          </a>
-        </div>
-        <p className="mb-5 text-sm text-muted/80">{project.subtitle}</p>
+        <h3 className="mb-1 text-2xl font-bold tracking-tight text-text">{project.title}</h3>
+        <p className="mb-4 text-sm leading-relaxed text-muted/80">{project.subtitle}</p>
 
-        <ul className="mb-6 space-y-3">
-          {project.highlights.map((h) => (
-            <li key={h} className="flex items-start gap-2.5 text-sm leading-relaxed text-muted">
-              <FaCircleCheck className="mt-1 shrink-0 text-accent" />
-              <span>{h}</span>
-            </li>
+        {/* Tech tags */}
+        <div className="mb-6 flex flex-wrap gap-2">
+          {project.tags.map((tag) => (
+            <span
+              key={tag}
+              className="rounded-md bg-accent/10 px-2.5 py-1 text-xs font-semibold tracking-wider text-accent uppercase"
+            >
+              {tag}
+            </span>
           ))}
-        </ul>
+        </div>
 
-        <div className="mt-auto flex flex-col gap-3">
+        {/* Action buttons */}
+        <div className="mt-auto flex items-center justify-between gap-4 border-t border-border/40 pt-4">
           <button
             type="button"
             onClick={() => onDeepDive(project)}
-            className="w-full rounded-lg bg-gradient-to-r from-accent to-accent-strong px-5 py-3 text-sm font-semibold text-[#091017] transition-all duration-300 hover:-translate-y-0.5 hover:brightness-105"
+            className="inline-flex items-center gap-1 text-sm font-semibold text-accent transition-colors hover:text-accent-strong cursor-pointer"
           >
-            View Deep-Dive
+            View Project →
           </button>
-          <a
-            href={project.deepDiveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 rounded-lg border border-accent/65 px-5 py-3 text-[0.85rem] font-medium text-accent transition-all duration-300 hover:bg-accent/15 hover:text-text"
-          >
-            {project.deepDiveType === 'linkedin' ? <FaLinkedinIn /> : <FaGithub />}
-            {project.deepDiveLabel}
-          </a>
+          <div className="flex items-center gap-4">
+            {project.deepDiveType === 'linkedin' && (
+              <a
+                href={project.deepDiveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-muted transition-colors hover:text-text"
+                title="View LinkedIn Deep-Dive"
+                aria-label="LinkedIn Deep-Dive"
+              >
+                <FaLinkedinIn className="h-4 w-4 text-[#0a66c2]" />
+                LinkedIn
+              </a>
+            )}
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-muted transition-colors hover:text-text"
+            >
+              <FaGithub className="h-4 w-4" />
+              GitHub
+            </a>
+          </div>
         </div>
 
-        <div className="mt-4 flex flex-wrap items-center justify-end gap-2 py-2 text-xs text-muted">
+        <div className="mt-4 flex flex-wrap items-center justify-end gap-2 pt-2 text-xs text-muted">
           <span className="status-dot h-2 w-2 rounded-full bg-[#4ade80] shadow-[0_0_8px_rgba(74,222,128,0.6)]" />
           <span>
             Infrastructure: <strong className="text-[#4ade80]">Healthy</strong>

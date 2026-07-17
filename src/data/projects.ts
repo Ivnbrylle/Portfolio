@@ -28,11 +28,13 @@ export interface DeepDive {
 
 export interface Project {
   id: string;
+  provider: 'aws' | 'gcp' | 'azure';
   title: string;
   subtitle: string;
   cardImage: string;
   githubUrl: string;
   highlights: string[];
+  tags: string[];
   deepDiveUrl: string;
   deepDiveLabel: string;
   deepDiveType: 'linkedin' | 'github';
@@ -43,6 +45,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: 'resilience',
+    provider: 'aws',
     title: 'Project Resilience',
     subtitle: 'High-Availability 3-Tier AWS Infrastructure',
     cardImage: '/Downloads/project-resilience-arch.png',
@@ -52,6 +55,7 @@ export const projects: Project[] = [
       'Fault Tolerance - Multi-AZ RDS with zero data loss during AZ failures.',
       'High Availability - Multi-AZ deployment survives single AZ outages.',
     ],
+    tags: ['AWS', 'Terraform', 'EC2', 'RDS', 'ASG'],
     deepDiveUrl:
       'https://www.linkedin.com/pulse/building-fault-tolerant-3-tier-aws-architecture-terraform-rempis-eiqtc',
     deepDiveLabel: 'Read Full Engineering Deep-Dive',
@@ -121,8 +125,9 @@ resource "aws_security_group" "db_sg" {
   },
   {
     id: 'janitor',
-    title: 'Auto Remediation',
-    subtitle: 'Event-Driven Self-Healing Infrastructure',
+    provider: 'aws',
+    title: 'Self-Healing Infrastructure',
+    subtitle: 'Automated recovery system that detects and restores failed Nginx services on AWS.',
     cardImage: '/Downloads/awsjanitor.png',
     githubUrl: 'https://github.com/Ivnbrylle/Auto-Remediation',
     highlights: [
@@ -130,6 +135,7 @@ resource "aws_security_group" "db_sg" {
       'Event-Driven Architecture - Responds to failures in real-time.',
       'Maintenance Mode - Skip automation during planned maintenance.',
     ],
+    tags: ['AWS', 'Terraform', 'Lambda', 'CloudWatch', 'Python'],
     deepDiveUrl:
       'https://www.linkedin.com/pulse/building-self-healing-cloud-my-journey-aws-janitor-ivan-brylle-rempis-eglmc',
     deepDiveLabel: 'Read Full Engineering Deep-Dive',
@@ -257,6 +263,7 @@ def lambda_handler(event, context):
   },
   {
     id: 'global-flow',
+    provider: 'aws',
     title: 'Project Global-Flow',
     subtitle: 'Multi-Region Serverless API with Active-Active Data Layer',
     cardImage: '/Downloads/project-global-flow-diagram.jpg',
@@ -266,6 +273,7 @@ def lambda_handler(event, context):
       'Active-Active Data - DynamoDB Global Table replication for cross-region durability.',
       'Infrastructure as Code - Full deployment and packaging automated through Terraform modules.',
     ],
+    tags: ['AWS', 'Terraform', 'Lambda', 'API Gateway', 'DynamoDB'],
     deepDiveUrl: 'https://github.com/Ivnbrylle/Global-Flow-Architecture',
     deepDiveLabel: 'View Full Source Code',
     deepDiveType: 'github',
@@ -339,6 +347,7 @@ resource "aws_dynamodb_table" "global_api_table" {
   },
   {
     id: 'arca',
+    provider: 'aws',
     title: 'Project A.R.C.A.',
     subtitle: 'AI Root-Cause Analysis for EC2-hosted Nginx',
     cardImage: '/Downloads/arca_architecture.png',
@@ -348,6 +357,7 @@ resource "aws_dynamodb_table" "global_api_table" {
       'Bedrock Analysis - Uses Amazon Bedrock to infer the likely root cause and fix.',
       'Incident Automation - Sends structured remediation summaries to Discord in real time.',
     ],
+    tags: ['AWS', 'Terraform', 'Lambda', 'Bedrock', 'Python', 'CloudWatch'],
     deepDiveUrl: 'https://www.linkedin.com/pulse/project-arca-ivan-brylle-rempis-vtjbc',
     deepDiveLabel: 'Read Full Engineering Deep-Dive',
     deepDiveType: 'linkedin',
@@ -385,6 +395,84 @@ resource "aws_dynamodb_table" "global_api_table" {
         { label: 'Compute', value: 'Amazon EC2, AWS Lambda, Amazon Bedrock.' },
         { label: 'Observability', value: 'CloudWatch Logs and subscription filters.' },
         { label: 'Automation', value: 'Terraform, Python 3.12, Discord webhooks.' },
+      ],
+    },
+  },
+  {
+    id: 'zero-idle',
+    provider: 'gcp',
+    title: 'Zero-Idle Worker Architecture',
+    subtitle: 'Event-driven, cost-effective serverless PDF compilation pipeline.',
+    cardImage: '/Downloads/gcp_diagram.png',
+    githubUrl: 'https://github.com/Ivnbrylle/zero-idle-worker-architecture',
+    highlights: [
+      'Zero active compute costs - Cloud Run scales down to zero instances when idle.',
+      'Event-Driven Execution - Eventarc triggers processing automatically on raw GCS uploads.',
+      'Automated Document Compiler - Containerized FastAPI decodes payload and builds PDF using ReportLab.',
+    ],
+    tags: ['GCP', 'Terraform', 'Cloud Run', 'Eventarc', 'GCS', 'Python'],
+    deepDiveUrl: 'https://github.com/Ivnbrylle/zero-idle-worker-architecture',
+    deepDiveLabel: 'View Full Source Code',
+    deepDiveType: 'github',
+    region: 'us-central1',
+    deepDive: {
+      problem:
+        'Keeping a container-based compilation server running continuously generates massive idle compute waste. I needed an event-driven system that runs on-demand, scaling container instances instantly upon upload and tearing them down completely when the queue is dry.',
+      solutionIntro: 'I engineered a serverless microservices pipeline on Google Cloud Platform (GCP) defined fully via Terraform:',
+      solution: [
+        'Storage Trigger: GCS Input Bucket receives files and broadcasts finalized object events.',
+        'Event Dispatch: Eventarc captures storage events and routes them as HTTP POST payloads.',
+        'Zero-Idle Compute: Cloud Run auto-provisions and scales the FastAPI container from 0 to N instances.',
+        'PDF Compilation: Worker container builds high-fidelity PDF documents using ReportLab and saves them to GCS Output Bucket.',
+      ],
+      diagram: '/Downloads/gcp_diagram.png',
+      iacIntro: 'Terraform config defining the scale-to-zero parameters on Cloud Run:',
+      codeBlocks: [
+        {
+          lang: 'Terraform',
+          file: 'main.tf',
+          code: `resource "google_cloud_run_v2_service" "pdf_worker" {
+  name     = "pdf-worker-service"
+  location = "us-central1"
+
+  template {
+    scaling {
+      min_instance_count = 0 # Scale to Zero!
+      max_instance_count = 5
+    }
+    containers {
+      image = "us-central1-docker.pkg.dev/zero-idle-worker-architecture/worker-repo/worker-image:v2"
+      ports {
+        container_port = 8080
+      }
+    }
+  }
+}`,
+        },
+      ],
+      results: [
+        {
+          value: '100%',
+          label: 'Idle Savings',
+          detail: 'Cloud Run instances scale down to absolute zero when no tasks exist.',
+        },
+        {
+          value: '<10s',
+          label: 'Processing',
+          detail: 'Cold-start container provisioning to final PDF compile finishes in seconds.',
+        },
+        {
+          value: '0',
+          label: 'SSH Exposure',
+          detail: 'Serverless architecture removes SSH attack vectors completely.',
+        },
+      ],
+      tech: [
+        { label: 'Cloud Provider', value: 'Google Cloud Platform (GCP).' },
+        { label: 'Compute', value: 'Google Cloud Run (Scale-to-Zero).' },
+        { label: 'Event Router', value: 'GCP Eventarc (GCS finalized trigger).' },
+        { label: 'Storage', value: 'Google Cloud Storage (GCS) Buckets.' },
+        { label: 'IaC & Language', value: 'Terraform (~> 5.0), Python (FastAPI, ReportLab).' },
       ],
     },
   },
