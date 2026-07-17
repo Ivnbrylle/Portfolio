@@ -36,8 +36,14 @@ export function Hero() {
             >
               Ivan Rempis
             </motion.h1>
-            <motion.p variants={item} className="mb-8 text-xl text-accent">
-              Aspiring Cloud Engineer
+            <motion.p variants={item} className="mb-4 text-xl font-semibold text-accent md:text-2xl">
+              Aspiring Cloud Engineer | BSCS Graduate
+            </motion.p>
+            <motion.p
+              variants={item}
+              className="mb-8 text-base leading-relaxed text-muted sm:text-lg"
+            >
+              I build scalable and resilient cloud infrastructure on AWS using Terraform and DevOps best practices. Passionate about Infrastructure as Code, automation, Kubernetes, and designing reliable systems that are secure, efficient, and built to grow.
             </motion.p>
             <motion.div variants={item} className="flex justify-center gap-4 md:justify-start">
               {socials.map(({ href, label, Icon }) => (
