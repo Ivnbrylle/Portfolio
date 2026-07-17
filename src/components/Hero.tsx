@@ -1,5 +1,7 @@
 import { motion, type Variants } from 'motion/react';
 import { FaLinkedinIn, FaGithub, FaInstagram } from 'react-icons/fa6';
+import { projects } from '../data/projects';
+import { certifications } from '../data/certs';
 
 const socials = [
   { href: 'https://www.linkedin.com/in/ivn-brylle/', label: 'LinkedIn', Icon: FaLinkedinIn },
@@ -17,6 +19,18 @@ const item: Variants = {
 };
 
 export function Hero() {
+  const certificationsCount = certifications.length;
+  // We add 1 to count the local AQ Prime project in Projects.tsx
+  const projectsCount = projects.length + 1;
+
+  const stats = [
+    // Since you just graduated, we highlight "Recent Graduate" here.
+    // Feel free to change value to "1+" and label to "Years Building" if desired!
+    { value: 'Recent', label: 'Graduate' },
+    { value: certificationsCount.toString(), label: 'Cloud Certs' },
+    { value: `${projectsCount}+`, label: 'Projects Shipped' },
+  ];
+
   return (
     <section
       id="home"
@@ -32,25 +46,66 @@ export function Hero() {
             </motion.p>
             <motion.h1
               variants={item}
-              className="mb-4 font-display text-5xl font-bold leading-tight tracking-tight text-text sm:text-6xl"
+              className="mb-3 font-display text-5xl font-bold leading-tight tracking-tight text-text sm:text-6xl"
             >
               Ivan Rempis
             </motion.h1>
-            <motion.p variants={item} className="mb-8 text-xl font-semibold text-accent md:text-2xl">
-              Aspiring Cloud Engineer | BSCS Graduate
+            <motion.h2
+              variants={item}
+              className="mb-4 font-display text-xl font-bold text-accent md:text-2xl"
+            >
+              Aspiring Cloud Engineer & DevOps Enthusiast
+            </motion.h2>
+            <motion.p
+              variants={item}
+              className="mb-8 max-w-[540px] text-base leading-relaxed text-muted mx-auto md:mx-0"
+            >
+              I build scalable cloud infrastructure and automate deployments using AWS, Terraform, and modern DevOps practices. Passionate about Infrastructure as Code, Kubernetes, and creating secure, reliable, and cost-efficient systems.
             </motion.p>
-            <motion.div variants={item} className="flex justify-center gap-4 md:justify-start">
-              {socials.map(({ href, label, Icon }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="flex h-12 w-12 items-center justify-center rounded-full border border-border text-muted transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:bg-gradient-to-r hover:from-accent hover:to-accent-strong hover:text-[#0b1017]"
-                >
-                  <Icon className="h-5 w-5" />
-                </a>
+
+            <motion.div variants={item} className="mb-12 flex flex-wrap items-center justify-center gap-4 md:justify-start">
+              <a
+                href="#aws-projects"
+                className="inline-flex items-center justify-center rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white dark:text-[#0b1017] transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent-strong hover:shadow-lg hover:shadow-accent/20 active:scale-95 cursor-pointer"
+              >
+                View Projects
+              </a>
+              <a
+                href="#contact"
+                className="inline-flex items-center justify-center rounded-full border border-border bg-card/45 px-5 py-2.5 text-sm font-semibold text-text transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:bg-card active:scale-95 cursor-pointer"
+              >
+                Contact Me
+              </a>
+              <div className="flex items-center gap-3 pl-2 border-l border-border/40">
+                {socials.map(({ href, label, Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:bg-gradient-to-r hover:from-accent hover:to-accent-strong hover:text-[#0b1017]"
+                  >
+                    <Icon className="h-4.5 w-4.5" />
+                  </a>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Stats Grid */}
+            <motion.div
+              variants={item}
+              className="grid grid-cols-3 gap-4 border-t border-border/40 pt-8 text-center md:text-left max-w-[480px] mx-auto md:mx-0"
+            >
+              {stats.map((stat) => (
+                <div key={stat.label} className="flex flex-col">
+                  <span className="font-display text-2xl font-bold tracking-tight text-text sm:text-3xl">
+                    {stat.value}
+                  </span>
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-muted/60 mt-0.5">
+                    {stat.label}
+                  </span>
+                </div>
               ))}
             </motion.div>
           </motion.div>

@@ -1,7 +1,6 @@
 import { Navbar } from './components/Navbar';
 import { ScrollProgress } from './components/ScrollProgress';
 import { Hero } from './components/Hero';
-import { About } from './components/About';
 import { Skills } from './components/Skills';
 import { SkillsMarquee } from './components/SkillsMarquee';
 import { Projects } from './components/Projects';
@@ -17,7 +16,6 @@ export function App() {
       <Navbar />
       <main>
         <Hero />
-        <About />
         <Skills />
         <Projects />
         <AwsProjects />
